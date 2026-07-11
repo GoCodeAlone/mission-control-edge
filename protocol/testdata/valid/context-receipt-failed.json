@@ -1,0 +1,12 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "session_id": "session_456",
+  "provider_id": "generic-cli",
+  "native_session_id": "agent/session%2Fopaque",
+  "context_version": "context-v1",
+  "source_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "delivery_mode": "initial_prompt",
+  "delivered_at": "2026-07-11T12:00:00Z",
+  "status": "failed",
+  "native_runtime_may_ignore": true
+}

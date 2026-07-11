@@ -1,0 +1,1 @@
+{"protocol_version":"mission-control.provider.v1alpha1","event_id":"event-authority-extension","provider_id":"agent-provider","role":"agent-harness","stream_id":"agent-stream","type":"usage.updated","sequence":1,"observed_at":"2026-07-11T12:00:00Z","payload":{},"extensions":{"example.dev/event":{"nested":{"project_id":"project-forged"}}}}

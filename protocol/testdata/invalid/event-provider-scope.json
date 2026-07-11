@@ -1,0 +1,1 @@
+{"protocol_version":"mission-control.provider.v1alpha1","event_id":"event_1","provider_id":"bad","role":"agent-harness","stream_id":"agent-stream","native_session_id":"native","type":"session.state_changed","sequence":1,"observed_at":"2026-07-11T12:00:00Z","payload":{},"extensions":{},"project_id":"project-forged"}

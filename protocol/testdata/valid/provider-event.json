@@ -1,0 +1,23 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "event_id": "event_native_1",
+  "provider_id": "generic-cli",
+  "role": "agent-harness",
+  "stream_id": "agent-stream-opaque",
+  "native_session_id": "agent/session%2Fopaque",
+  "type": "session.state_changed",
+  "sequence": 12,
+  "observed_at": "2026-07-11T12:00:01Z",
+  "payload": {
+    "axis": "activity",
+    "state": "waiting_for_approval",
+    "source": "harness-provider",
+    "observed_at": "2026-07-11T12:00:01Z",
+    "sequence": 12,
+    "confidence": 0.99,
+    "expires_at": "2026-07-11T12:05:01Z",
+    "authority": "authoritative",
+    "status": "approval pending"
+  },
+  "extensions": {}
+}

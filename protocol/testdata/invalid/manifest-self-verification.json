@@ -1,0 +1,1 @@
+{"protocol_version":"mission-control.provider.v1alpha1","id":"bad","roles":["agent-harness"],"name":"Bad","version":"0.1.0","executable":"bad","platforms":[{"os":"linux","architecture":"amd64"}],"capabilities":[],"interaction_modes":["cli"],"permissions":[],"configuration_schema":"schema.json","extensions":{},"verification_tier":"live_verified"}

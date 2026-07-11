@@ -1,0 +1,1164 @@
+{
+  "$defs": {
+    "approval_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "command_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "context_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "environment": {
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "role",
+            "provider"
+          ],
+          "type": "object"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "gateway_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "harness": {
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "role",
+            "provider"
+          ],
+          "type": "object"
+        },
+        "nonce": {
+          "maxLength": 256,
+          "minLength": 22,
+          "pattern": "^[A-Za-z0-9_-]{22,256}$",
+          "type": "string"
+        },
+        "policy_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "resource_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "runtime": {
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "role",
+            "provider"
+          ],
+          "type": "object"
+        },
+        "scopes": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "session_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "session_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "work_item_revision": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "command_digest",
+        "session_id",
+        "session_revision",
+        "work_item_revision",
+        "resource_revision",
+        "context_version",
+        "policy_revision",
+        "environment",
+        "harness",
+        "gateway_id",
+        "scopes",
+        "expires_at",
+        "nonce"
+      ],
+      "type": "object"
+    },
+    "custody_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "binding": {
+          "additionalProperties": false,
+          "properties": {
+            "configuration_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "controls": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                "type": "string"
+              },
+              "maxItems": 128,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "data_mode": {
+              "enum": [
+                "full",
+                "ephemeral-transcript",
+                "metadata-only",
+                "local-control"
+              ],
+              "type": "string"
+            },
+            "gateway_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "gateway_key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "image_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_environment_id": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[^\\x00\\r\\n]+$",
+              "type": "string"
+            },
+            "policy_revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "session_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "session_id",
+            "policy_revision",
+            "gateway_id",
+            "gateway_key_id",
+            "provider",
+            "native_environment_id",
+            "configuration_digest",
+            "image_digest",
+            "controls",
+            "data_mode"
+          ],
+          "type": "object"
+        },
+        "evidence_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "nonce": {
+          "maxLength": 256,
+          "minLength": 22,
+          "pattern": "^[A-Za-z0-9_-]{22,256}$",
+          "type": "string"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "signature": {
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "const": "ed25519"
+            },
+            "issuer": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "purpose": {
+              "enum": [
+                "custody-evidence"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "pattern": "^[A-Za-z0-9_-]{86}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "algorithm",
+            "purpose",
+            "issuer",
+            "key_id",
+            "value"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "evidence_id",
+        "nonce",
+        "binding",
+        "issued_at",
+        "expires_at",
+        "signature"
+      ],
+      "type": "object"
+    },
+    "isolation_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "binding": {
+          "additionalProperties": false,
+          "properties": {
+            "configuration_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "controls": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                "type": "string"
+              },
+              "maxItems": 128,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "data_mode": {
+              "enum": [
+                "full",
+                "ephemeral-transcript",
+                "metadata-only",
+                "local-control"
+              ],
+              "type": "string"
+            },
+            "gateway_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "gateway_key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "image_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_environment_id": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[^\\x00\\r\\n]+$",
+              "type": "string"
+            },
+            "policy_revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "session_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "session_id",
+            "policy_revision",
+            "gateway_id",
+            "gateway_key_id",
+            "provider",
+            "native_environment_id",
+            "configuration_digest",
+            "image_digest",
+            "controls",
+            "data_mode"
+          ],
+          "type": "object"
+        },
+        "evidence_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "nonce": {
+          "maxLength": 256,
+          "minLength": 22,
+          "pattern": "^[A-Za-z0-9_-]{22,256}$",
+          "type": "string"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "signature": {
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "const": "ed25519"
+            },
+            "issuer": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "purpose": {
+              "enum": [
+                "isolation-evidence"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "pattern": "^[A-Za-z0-9_-]{86}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "algorithm",
+            "purpose",
+            "issuer",
+            "key_id",
+            "value"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "evidence_id",
+        "nonce",
+        "binding",
+        "issued_at",
+        "expires_at",
+        "signature"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:gocodealone:mission-control:command:v1alpha1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "properties": {
+            "capability": {
+              "const": "agent.cancel"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "agent.interrupt"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "agent.send_message"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "approval.approve"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "approval.expire"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "approval.reject"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "artifact.register"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "context.deliver"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "environment.mount"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "environment.provision"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "environment.shutdown"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "events.unsubscribe"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "harness.launch"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "harness.resume"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "harness.stop"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "pane.close"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "pane.create"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "pane.focus"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "pane.resize"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "pane.split"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "provider.shutdown"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.adopt"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.archive"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.attach"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.checkpoint"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.clone"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.create_session"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.detach"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.export"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.fork"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.import"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.migrate"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.restore"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.resume"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.stop_session"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "runtime.terminate_session"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "terminal.attach"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "terminal.detach"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "terminal.resize"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "terminal.send_input"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "terminal.send_keys"
+            },
+            "delivery_class": {
+              "const": "at_most_once"
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "workspace.close"
+            },
+            "delivery_class": {
+              "const": "provider_idempotent"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "const": "workspace.create"
+            },
+            "delivery_class": {
+              "const": "state_reconciled"
+            }
+          }
+        },
+        {
+          "properties": {
+            "capability": {
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,127}$",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "cancellation_token": {
+      "maxLength": 256,
+      "minLength": 16,
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "command_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "pattern": "Z$",
+      "type": "string"
+    },
+    "delivery_class": {
+      "enum": [
+        "provider_idempotent",
+        "state_reconciled",
+        "at_most_once"
+      ],
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 16,
+      "type": "string"
+    },
+    "payload": {},
+    "protocol_version": {
+      "const": "mission-control.provider.v1alpha1"
+    },
+    "session_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "command_id",
+    "capability",
+    "idempotency_key",
+    "cancellation_token",
+    "deadline",
+    "delivery_class",
+    "payload"
+  ],
+  "title": "Mission Control command v1alpha1",
+  "type": "object"
+}

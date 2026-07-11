@@ -1,0 +1,17 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "artifact_id": "artifact_1",
+  "session_id": "session_456",
+  "creator_type": "agent",
+  "creator_id": "generic-cli",
+  "version": "1",
+  "review_state": "pending",
+  "locality": "local-only",
+  "locator": "local-resource://gateway_customer_7/artifact_1",
+  "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "size": 4096,
+  "digest": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+  "classification": "confidential",
+  "source_resources": ["resource_input_1"],
+  "extensions": {}
+}

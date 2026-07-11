@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "encoding": "base64url-no-padding",
+  "keys": {
+    "gateway": {
+      "seed_base64url": "FRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRU",
+      "public_key_base64url": "1UIH2hlJd9z0atv-wrwudbUtWopCGE_t_cAAJPDj6No"
+    },
+    "mission": {
+      "seed_base64url": "FhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhY",
+      "public_key_base64url": "URw0oaLLUh3xa7JGuN6OeZfOI1x-drIqPXUDokgZ3Yo"
+    }
+  },
+  "vectors": [
+    {
+      "name": "isolation_evidence",
+      "purpose": "isolation-evidence",
+      "key": "gateway",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "evidence_id": "isolation-evidence-1",
+        "nonce": "isolation-nonce-0123456789abcdef",
+        "binding": {
+          "session_id": "session_456",
+          "policy_revision": 8,
+          "gateway_id": "gateway_customer_7",
+          "gateway_key_id": "gateway-evidence-key",
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_environment_id": "native-environment-opaque",
+          "configuration_digest": "sha256:b7d64a9221007dfd5390f7df6cd5b8f3ea4f82faa1237141e35ebf161f5511a1",
+          "image_digest": "sha256:6105d6cc76af400325e94d588ce511be5bfdbb73b437dc51eca43917d7a43e3d",
+          "controls": [
+            "network:none",
+            "read-only-root",
+            "non-root"
+          ],
+          "data_mode": "metadata-only"
+        },
+        "issued_at": "2026-07-11T12:29:00Z",
+        "expires_at": "2026-07-11T12:31:00Z",
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "isolation-evidence",
+          "issuer": "gateway_customer_7",
+          "key_id": "gateway-evidence-key",
+          "value": "6QQXn55otZ60DOvtB7gl6j0tRv_2eNNVgHPTxzI0Lp2cXFKkP82K3csptnFK-BD1iPi6CQ4XDKfNG-0X_YXrCg"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGlzb2xhdGlvbi1ldmlkZW5jZQB7InByb3RvY29sX3ZlcnNpb24iOiJtaXNzaW9uLWNvbnRyb2wucHJvdmlkZXIudjFhbHBoYTEiLCJldmlkZW5jZV9pZCI6Imlzb2xhdGlvbi1ldmlkZW5jZS0xIiwibm9uY2UiOiJpc29sYXRpb24tbm9uY2UtMDEyMzQ1Njc4OWFiY2RlZiIsImJpbmRpbmciOnsic2Vzc2lvbl9pZCI6InNlc3Npb25fNDU2IiwicG9saWN5X3JldmlzaW9uIjo4LCJnYXRld2F5X2lkIjoiZ2F0ZXdheV9jdXN0b21lcl83IiwiZ2F0ZXdheV9rZXlfaWQiOiJnYXRld2F5LWV2aWRlbmNlLWtleSIsInByb3ZpZGVyIjp7ImlkIjoic2FuZGJveC13b3JrZXIiLCJ2ZXJzaW9uIjoiMC4xLjAiLCJkaWdlc3QiOiJzaGEyNTY6NWM0YzE5NjQzNDBhY2E1YjY1MzkzYmJlOWQzMjQ5Y2RkNzFiZTI2NjY1YjMzMjBhZDY5NGYwMzRmMjc0MzI4MyJ9LCJuYXRpdmVfZW52aXJvbm1lbnRfaWQiOiJuYXRpdmUtZW52aXJvbm1lbnQtb3BhcXVlIiwiY29uZmlndXJhdGlvbl9kaWdlc3QiOiJzaGEyNTY6YjdkNjRhOTIyMTAwN2RmZDUzOTBmN2RmNmNkNWI4ZjNlYTRmODJmYWExMjM3MTQxZTM1ZWJmMTYxZjU1MTFhMSIsImltYWdlX2RpZ2VzdCI6InNoYTI1Njo2MTA1ZDZjYzc2YWY0MDAzMjVlOTRkNTg4Y2U1MTFiZTViZmRiYjczYjQzN2RjNTFlY2E0MzkxN2Q3YTQzZTNkIiwiY29udHJvbHMiOlsibmV0d29yazpub25lIiwibm9uLXJvb3QiLCJyZWFkLW9ubHktcm9vdCJdLCJkYXRhX21vZGUiOiJtZXRhZGF0YS1vbmx5In0sImlzc3VlZF9hdCI6IjIwMjYtMDctMTFUMTI6Mjk6MDBaIiwiZXhwaXJlc19hdCI6IjIwMjYtMDctMTFUMTI6MzE6MDBaIiwic2lnbmF0dXJlIjp7ImFsZ29yaXRobSI6ImVkMjU1MTkiLCJwdXJwb3NlIjoiaXNvbGF0aW9uLWV2aWRlbmNlIiwiaXNzdWVyIjoiZ2F0ZXdheV9jdXN0b21lcl83Iiwia2V5X2lkIjoiZ2F0ZXdheS1ldmlkZW5jZS1rZXkiLCJ2YWx1ZSI6IiJ9fQ",
+      "signature_base64url": "6QQXn55otZ60DOvtB7gl6j0tRv_2eNNVgHPTxzI0Lp2cXFKkP82K3csptnFK-BD1iPi6CQ4XDKfNG-0X_YXrCg"
+    },
+    {
+      "name": "custody_evidence",
+      "purpose": "custody-evidence",
+      "key": "gateway",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "evidence_id": "custody-evidence-1",
+        "nonce": "custody-nonce-0123456789abcdef",
+        "binding": {
+          "session_id": "session_456",
+          "policy_revision": 8,
+          "gateway_id": "gateway_customer_7",
+          "gateway_key_id": "gateway-evidence-key",
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_environment_id": "native-environment-opaque",
+          "configuration_digest": "sha256:b7d64a9221007dfd5390f7df6cd5b8f3ea4f82faa1237141e35ebf161f5511a1",
+          "image_digest": "sha256:6105d6cc76af400325e94d588ce511be5bfdbb73b437dc51eca43917d7a43e3d",
+          "controls": [
+            "no-swap",
+            "no-dump",
+            "zero-on-release"
+          ],
+          "data_mode": "ephemeral-transcript"
+        },
+        "issued_at": "2026-07-11T12:29:00Z",
+        "expires_at": "2026-07-11T12:31:00Z",
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "custody-evidence",
+          "issuer": "gateway_customer_7",
+          "key_id": "gateway-evidence-key",
+          "value": "7Z0DtkSgn_vOjqBBdCoNsw_C7b0sx_wNdNzZrm7vtcPQDBUx5JhOTt9Mnx8K3E3W-nlbAAob9plXbmGI8_tnAA"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGN1c3RvZHktZXZpZGVuY2UAeyJwcm90b2NvbF92ZXJzaW9uIjoibWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExIiwiZXZpZGVuY2VfaWQiOiJjdXN0b2R5LWV2aWRlbmNlLTEiLCJub25jZSI6ImN1c3RvZHktbm9uY2UtMDEyMzQ1Njc4OWFiY2RlZiIsImJpbmRpbmciOnsic2Vzc2lvbl9pZCI6InNlc3Npb25fNDU2IiwicG9saWN5X3JldmlzaW9uIjo4LCJnYXRld2F5X2lkIjoiZ2F0ZXdheV9jdXN0b21lcl83IiwiZ2F0ZXdheV9rZXlfaWQiOiJnYXRld2F5LWV2aWRlbmNlLWtleSIsInByb3ZpZGVyIjp7ImlkIjoic2FuZGJveC13b3JrZXIiLCJ2ZXJzaW9uIjoiMC4xLjAiLCJkaWdlc3QiOiJzaGEyNTY6NWM0YzE5NjQzNDBhY2E1YjY1MzkzYmJlOWQzMjQ5Y2RkNzFiZTI2NjY1YjMzMjBhZDY5NGYwMzRmMjc0MzI4MyJ9LCJuYXRpdmVfZW52aXJvbm1lbnRfaWQiOiJuYXRpdmUtZW52aXJvbm1lbnQtb3BhcXVlIiwiY29uZmlndXJhdGlvbl9kaWdlc3QiOiJzaGEyNTY6YjdkNjRhOTIyMTAwN2RmZDUzOTBmN2RmNmNkNWI4ZjNlYTRmODJmYWExMjM3MTQxZTM1ZWJmMTYxZjU1MTFhMSIsImltYWdlX2RpZ2VzdCI6InNoYTI1Njo2MTA1ZDZjYzc2YWY0MDAzMjVlOTRkNTg4Y2U1MTFiZTViZmRiYjczYjQzN2RjNTFlY2E0MzkxN2Q3YTQzZTNkIiwiY29udHJvbHMiOlsibm8tZHVtcCIsIm5vLXN3YXAiLCJ6ZXJvLW9uLXJlbGVhc2UiXSwiZGF0YV9tb2RlIjoiZXBoZW1lcmFsLXRyYW5zY3JpcHQifSwiaXNzdWVkX2F0IjoiMjAyNi0wNy0xMVQxMjoyOTowMFoiLCJleHBpcmVzX2F0IjoiMjAyNi0wNy0xMVQxMjozMTowMFoiLCJzaWduYXR1cmUiOnsiYWxnb3JpdGhtIjoiZWQyNTUxOSIsInB1cnBvc2UiOiJjdXN0b2R5LWV2aWRlbmNlIiwiaXNzdWVyIjoiZ2F0ZXdheV9jdXN0b21lcl83Iiwia2V5X2lkIjoiZ2F0ZXdheS1ldmlkZW5jZS1rZXkiLCJ2YWx1ZSI6IiJ9fQ",
+      "signature_base64url": "7Z0DtkSgn_vOjqBBdCoNsw_C7b0sx_wNdNzZrm7vtcPQDBUx5JhOTt9Mnx8K3E3W-nlbAAob9plXbmGI8_tnAA"
+    },
+    {
+      "name": "native_contract_verification",
+      "purpose": "contract-verification",
+      "key": "mission",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "evidence_id": "verification-native",
+        "tier": "native_contract_tested",
+        "subject": {
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_artifact": {
+            "id": "native-cli",
+            "version": "2.0.0",
+            "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+          },
+          "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+          },
+          "capabilities": [
+            "provider.initialize",
+            "harness.launch"
+          ],
+          "cases": [
+            "initialize",
+            "launch"
+          ],
+          "suite_version": "v0.1.0",
+          "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+          "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+          "data_modes": [
+            "metadata-only"
+          ]
+        },
+        "result": "passed",
+        "reference": "evidence://mission/verification/native",
+        "issued_at": "2026-07-11T12:29:00Z",
+        "expires_at": "2026-07-11T13:30:00Z",
+        "trust_epoch": 7,
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "contract-verification",
+          "issuer": "mission-verification",
+          "key_id": "contract-key",
+          "value": "ZMzoFzplr1eDLHOofxRwUR6e3qpJoXCH35XIYqOXTGOZuVmIdzQEKj9Wm_xRdsVB9rzzy1ckn-IzaJgW7FA8CQ"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGNvbnRyYWN0LXZlcmlmaWNhdGlvbgB7InByb3RvY29sX3ZlcnNpb24iOiJtaXNzaW9uLWNvbnRyb2wucHJvdmlkZXIudjFhbHBoYTEiLCJldmlkZW5jZV9pZCI6InZlcmlmaWNhdGlvbi1uYXRpdmUiLCJ0aWVyIjoibmF0aXZlX2NvbnRyYWN0X3Rlc3RlZCIsInN1YmplY3QiOnsicHJvdmlkZXIiOnsiaWQiOiJzYW5kYm94LXdvcmtlciIsInZlcnNpb24iOiIwLjEuMCIsImRpZ2VzdCI6InNoYTI1Njo1YzRjMTk2NDM0MGFjYTViNjUzOTNiYmU5ZDMyNDljZGQ3MWJlMjY2NjViMzMyMGFkNjk0ZjAzNGYyNzQzMjgzIn0sIm5hdGl2ZV9hcnRpZmFjdCI6eyJpZCI6Im5hdGl2ZS1jbGkiLCJ2ZXJzaW9uIjoiMi4wLjAiLCJkaWdlc3QiOiJzaGEyNTY6YmVmMzJkMmMzMTVhMjg5NTc2ZjJhNjgyOGQyN2VkYjE2YmIzMTZhNGQ4NWMyNzFmMmQ3OTQwNDVmM2VhNjY4ZCJ9LCJwbGF0Zm9ybSI6eyJvcyI6ImxpbnV4IiwiYXJjaGl0ZWN0dXJlIjoiYW1kNjQifSwiY2FwYWJpbGl0aWVzIjpbImhhcm5lc3MubGF1bmNoIiwicHJvdmlkZXIuaW5pdGlhbGl6ZSJdLCJjYXNlcyI6WyJpbml0aWFsaXplIiwibGF1bmNoIl0sInN1aXRlX3ZlcnNpb24iOiJ2MC4xLjAiLCJzdWl0ZV9kaWdlc3QiOiJzaGEyNTY6ZjhlYmQ0M2RiZWYxZjAyOWJmNDkzMGM2NWM5YjdjNWNjNzZhZjQ3NjkyN2NlZTg2MWZmMThmY2M3M2JmYzRhYiIsImNvbmZpZ3VyYXRpb25fZGlnZXN0Ijoic2hhMjU2OmI3OTYwNmZiM2FmZWE1YmQxNjA5ZWQ0MGI2MjIxNDJmMWM5ODEyNWFiY2ZlODlhNzZhNjYxYjBlOGUzNDM5MTAiLCJkYXRhX21vZGVzIjpbIm1ldGFkYXRhLW9ubHkiXX0sInJlc3VsdCI6InBhc3NlZCIsInJlZmVyZW5jZSI6ImV2aWRlbmNlOi8vbWlzc2lvbi92ZXJpZmljYXRpb24vbmF0aXZlIiwiaXNzdWVkX2F0IjoiMjAyNi0wNy0xMVQxMjoyOTowMFoiLCJleHBpcmVzX2F0IjoiMjAyNi0wNy0xMVQxMzozMDowMFoiLCJ0cnVzdF9lcG9jaCI6Nywic2lnbmF0dXJlIjp7ImFsZ29yaXRobSI6ImVkMjU1MTkiLCJwdXJwb3NlIjoiY29udHJhY3QtdmVyaWZpY2F0aW9uIiwiaXNzdWVyIjoibWlzc2lvbi12ZXJpZmljYXRpb24iLCJrZXlfaWQiOiJjb250cmFjdC1rZXkiLCJ2YWx1ZSI6IiJ9fQ",
+      "signature_base64url": "ZMzoFzplr1eDLHOofxRwUR6e3qpJoXCH35XIYqOXTGOZuVmIdzQEKj9Wm_xRdsVB9rzzy1ckn-IzaJgW7FA8CQ"
+    },
+    {
+      "name": "live_run_authorization",
+      "purpose": "live-run-authorization",
+      "key": "mission",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "authorization_id": "live-authorization-1",
+        "subject": {
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_artifact": {
+            "id": "native-cli",
+            "version": "2.0.0",
+            "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+          },
+          "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+          },
+          "capabilities": [
+            "provider.initialize",
+            "harness.launch"
+          ],
+          "cases": [
+            "initialize",
+            "launch"
+          ],
+          "suite_version": "v0.1.0",
+          "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+          "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+          "data_modes": [
+            "metadata-only"
+          ]
+        },
+        "tenant_id": "tenant_1",
+        "gateway_id": "gateway_customer_7",
+        "gateway_key_id": "gateway-evidence-key",
+        "correlation_id": "correlation_1",
+        "run_nonce": "live-run-nonce-0123456789abcdef",
+        "budget_reference": "budget://tenant/1",
+        "credential_reference": "credential://gateway/ref",
+        "issued_at": "2026-07-11T12:28:00Z",
+        "expires_at": "2026-07-11T12:35:00Z",
+        "trust_epoch": 7,
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "live-run-authorization",
+          "issuer": "mission-live-authorization",
+          "key_id": "authorization-key",
+          "value": "7OEZb7Gr_2W2xR6A4_lXu7nTz20zuCXNiLRXHd2LEhXQBrpU5pbUhMG9TQxlEoXjvL3Q3NMErSPBu4pIRWu6Cg"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGxpdmUtcnVuLWF1dGhvcml6YXRpb24AeyJwcm90b2NvbF92ZXJzaW9uIjoibWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExIiwiYXV0aG9yaXphdGlvbl9pZCI6ImxpdmUtYXV0aG9yaXphdGlvbi0xIiwic3ViamVjdCI6eyJwcm92aWRlciI6eyJpZCI6InNhbmRib3gtd29ya2VyIiwidmVyc2lvbiI6IjAuMS4wIiwiZGlnZXN0Ijoic2hhMjU2OjVjNGMxOTY0MzQwYWNhNWI2NTM5M2JiZTlkMzI0OWNkZDcxYmUyNjY2NWIzMzIwYWQ2OTRmMDM0ZjI3NDMyODMifSwibmF0aXZlX2FydGlmYWN0Ijp7ImlkIjoibmF0aXZlLWNsaSIsInZlcnNpb24iOiIyLjAuMCIsImRpZ2VzdCI6InNoYTI1NjpiZWYzMmQyYzMxNWEyODk1NzZmMmE2ODI4ZDI3ZWRiMTZiYjMxNmE0ZDg1YzI3MWYyZDc5NDA0NWYzZWE2NjhkIn0sInBsYXRmb3JtIjp7Im9zIjoibGludXgiLCJhcmNoaXRlY3R1cmUiOiJhbWQ2NCJ9LCJjYXBhYmlsaXRpZXMiOlsiaGFybmVzcy5sYXVuY2giLCJwcm92aWRlci5pbml0aWFsaXplIl0sImNhc2VzIjpbImluaXRpYWxpemUiLCJsYXVuY2giXSwic3VpdGVfdmVyc2lvbiI6InYwLjEuMCIsInN1aXRlX2RpZ2VzdCI6InNoYTI1NjpmOGViZDQzZGJlZjFmMDI5YmY0OTMwYzY1YzliN2M1Y2M3NmFmNDc2OTI3Y2VlODYxZmYxOGZjYzczYmZjNGFiIiwiY29uZmlndXJhdGlvbl9kaWdlc3QiOiJzaGEyNTY6Yjc5NjA2ZmIzYWZlYTViZDE2MDllZDQwYjYyMjE0MmYxYzk4MTI1YWJjZmU4OWE3NmE2NjFiMGU4ZTM0MzkxMCIsImRhdGFfbW9kZXMiOlsibWV0YWRhdGEtb25seSJdfSwidGVuYW50X2lkIjoidGVuYW50XzEiLCJnYXRld2F5X2lkIjoiZ2F0ZXdheV9jdXN0b21lcl83IiwiZ2F0ZXdheV9rZXlfaWQiOiJnYXRld2F5LWV2aWRlbmNlLWtleSIsImNvcnJlbGF0aW9uX2lkIjoiY29ycmVsYXRpb25fMSIsInJ1bl9ub25jZSI6ImxpdmUtcnVuLW5vbmNlLTAxMjM0NTY3ODlhYmNkZWYiLCJidWRnZXRfcmVmZXJlbmNlIjoiYnVkZ2V0Oi8vdGVuYW50LzEiLCJjcmVkZW50aWFsX3JlZmVyZW5jZSI6ImNyZWRlbnRpYWw6Ly9nYXRld2F5L3JlZiIsImlzc3VlZF9hdCI6IjIwMjYtMDctMTFUMTI6Mjg6MDBaIiwiZXhwaXJlc19hdCI6IjIwMjYtMDctMTFUMTI6MzU6MDBaIiwidHJ1c3RfZXBvY2giOjcsInNpZ25hdHVyZSI6eyJhbGdvcml0aG0iOiJlZDI1NTE5IiwicHVycG9zZSI6ImxpdmUtcnVuLWF1dGhvcml6YXRpb24iLCJpc3N1ZXIiOiJtaXNzaW9uLWxpdmUtYXV0aG9yaXphdGlvbiIsImtleV9pZCI6ImF1dGhvcml6YXRpb24ta2V5IiwidmFsdWUiOiIifX0",
+      "signature_base64url": "7OEZb7Gr_2W2xR6A4_lXu7nTz20zuCXNiLRXHd2LEhXQBrpU5pbUhMG9TQxlEoXjvL3Q3NMErSPBu4pIRWu6Cg"
+    },
+    {
+      "name": "live_run_receipt",
+      "purpose": "live-run-receipt",
+      "key": "gateway",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "receipt_id": "live-receipt-1",
+        "authorization_id": "live-authorization-1",
+        "subject": {
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_artifact": {
+            "id": "native-cli",
+            "version": "2.0.0",
+            "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+          },
+          "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+          },
+          "capabilities": [
+            "provider.initialize",
+            "harness.launch"
+          ],
+          "cases": [
+            "initialize",
+            "launch"
+          ],
+          "suite_version": "v0.1.0",
+          "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+          "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+          "data_modes": [
+            "metadata-only"
+          ]
+        },
+        "tenant_id": "tenant_1",
+        "gateway_id": "gateway_customer_7",
+        "correlation_id": "correlation_1",
+        "run_nonce": "live-run-nonce-0123456789abcdef",
+        "budget_reference": "budget://tenant/1",
+        "credential_reference": "credential://gateway/ref",
+        "result": "passed",
+        "usage": {
+          "input_tokens": 10,
+          "output_tokens": 4,
+          "cost_microunits": 200
+        },
+        "audit_event_id": "audit-event-1",
+        "issued_at": "2026-07-11T12:29:00Z",
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "live-run-receipt",
+          "issuer": "gateway_customer_7",
+          "key_id": "gateway-evidence-key",
+          "value": "TftHab3IuCmA4qirTwV5_pvmWBGgkRtehkWBCVeJxPdn8vBwT2A9G2TBVUXpBWeItIgSE3fOZvuxVHdXfj_-Bw"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGxpdmUtcnVuLXJlY2VpcHQAeyJwcm90b2NvbF92ZXJzaW9uIjoibWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExIiwicmVjZWlwdF9pZCI6ImxpdmUtcmVjZWlwdC0xIiwiYXV0aG9yaXphdGlvbl9pZCI6ImxpdmUtYXV0aG9yaXphdGlvbi0xIiwic3ViamVjdCI6eyJwcm92aWRlciI6eyJpZCI6InNhbmRib3gtd29ya2VyIiwidmVyc2lvbiI6IjAuMS4wIiwiZGlnZXN0Ijoic2hhMjU2OjVjNGMxOTY0MzQwYWNhNWI2NTM5M2JiZTlkMzI0OWNkZDcxYmUyNjY2NWIzMzIwYWQ2OTRmMDM0ZjI3NDMyODMifSwibmF0aXZlX2FydGlmYWN0Ijp7ImlkIjoibmF0aXZlLWNsaSIsInZlcnNpb24iOiIyLjAuMCIsImRpZ2VzdCI6InNoYTI1NjpiZWYzMmQyYzMxNWEyODk1NzZmMmE2ODI4ZDI3ZWRiMTZiYjMxNmE0ZDg1YzI3MWYyZDc5NDA0NWYzZWE2NjhkIn0sInBsYXRmb3JtIjp7Im9zIjoibGludXgiLCJhcmNoaXRlY3R1cmUiOiJhbWQ2NCJ9LCJjYXBhYmlsaXRpZXMiOlsiaGFybmVzcy5sYXVuY2giLCJwcm92aWRlci5pbml0aWFsaXplIl0sImNhc2VzIjpbImluaXRpYWxpemUiLCJsYXVuY2giXSwic3VpdGVfdmVyc2lvbiI6InYwLjEuMCIsInN1aXRlX2RpZ2VzdCI6InNoYTI1NjpmOGViZDQzZGJlZjFmMDI5YmY0OTMwYzY1YzliN2M1Y2M3NmFmNDc2OTI3Y2VlODYxZmYxOGZjYzczYmZjNGFiIiwiY29uZmlndXJhdGlvbl9kaWdlc3QiOiJzaGEyNTY6Yjc5NjA2ZmIzYWZlYTViZDE2MDllZDQwYjYyMjE0MmYxYzk4MTI1YWJjZmU4OWE3NmE2NjFiMGU4ZTM0MzkxMCIsImRhdGFfbW9kZXMiOlsibWV0YWRhdGEtb25seSJdfSwidGVuYW50X2lkIjoidGVuYW50XzEiLCJnYXRld2F5X2lkIjoiZ2F0ZXdheV9jdXN0b21lcl83IiwiY29ycmVsYXRpb25faWQiOiJjb3JyZWxhdGlvbl8xIiwicnVuX25vbmNlIjoibGl2ZS1ydW4tbm9uY2UtMDEyMzQ1Njc4OWFiY2RlZiIsImJ1ZGdldF9yZWZlcmVuY2UiOiJidWRnZXQ6Ly90ZW5hbnQvMSIsImNyZWRlbnRpYWxfcmVmZXJlbmNlIjoiY3JlZGVudGlhbDovL2dhdGV3YXkvcmVmIiwicmVzdWx0IjoicGFzc2VkIiwidXNhZ2UiOnsiaW5wdXRfdG9rZW5zIjoxMCwib3V0cHV0X3Rva2VucyI6NCwiY29zdF9taWNyb3VuaXRzIjoyMDB9LCJhdWRpdF9ldmVudF9pZCI6ImF1ZGl0LWV2ZW50LTEiLCJpc3N1ZWRfYXQiOiIyMDI2LTA3LTExVDEyOjI5OjAwWiIsInNpZ25hdHVyZSI6eyJhbGdvcml0aG0iOiJlZDI1NTE5IiwicHVycG9zZSI6ImxpdmUtcnVuLXJlY2VpcHQiLCJpc3N1ZXIiOiJnYXRld2F5X2N1c3RvbWVyXzciLCJrZXlfaWQiOiJnYXRld2F5LWV2aWRlbmNlLWtleSIsInZhbHVlIjoiIn19",
+      "signature_base64url": "TftHab3IuCmA4qirTwV5_pvmWBGgkRtehkWBCVeJxPdn8vBwT2A9G2TBVUXpBWeItIgSE3fOZvuxVHdXfj_-Bw"
+    },
+    {
+      "name": "live_verification",
+      "purpose": "live-verification",
+      "key": "mission",
+      "document": {
+        "protocol_version": "mission-control.provider.v1alpha1",
+        "evidence_id": "verification-live",
+        "tier": "live_verified",
+        "subject": {
+          "provider": {
+            "id": "sandbox-worker",
+            "version": "0.1.0",
+            "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+          },
+          "native_artifact": {
+            "id": "native-cli",
+            "version": "2.0.0",
+            "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+          },
+          "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+          },
+          "capabilities": [
+            "provider.initialize",
+            "harness.launch"
+          ],
+          "cases": [
+            "initialize",
+            "launch"
+          ],
+          "suite_version": "v0.1.0",
+          "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+          "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+          "data_modes": [
+            "metadata-only"
+          ]
+        },
+        "result": "passed",
+        "reference": "evidence://mission/verification/live",
+        "issued_at": "2026-07-11T12:29:30Z",
+        "expires_at": "2026-07-11T13:30:00Z",
+        "trust_epoch": 7,
+        "live_authorization": {
+          "protocol_version": "mission-control.provider.v1alpha1",
+          "authorization_id": "live-authorization-1",
+          "subject": {
+            "provider": {
+              "id": "sandbox-worker",
+              "version": "0.1.0",
+              "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+            },
+            "native_artifact": {
+              "id": "native-cli",
+              "version": "2.0.0",
+              "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+            },
+            "platform": {
+              "os": "linux",
+              "architecture": "amd64"
+            },
+            "capabilities": [
+              "provider.initialize",
+              "harness.launch"
+            ],
+            "cases": [
+              "initialize",
+              "launch"
+            ],
+            "suite_version": "v0.1.0",
+            "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+            "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+            "data_modes": [
+              "metadata-only"
+            ]
+          },
+          "tenant_id": "tenant_1",
+          "gateway_id": "gateway_customer_7",
+          "gateway_key_id": "gateway-evidence-key",
+          "correlation_id": "correlation_1",
+          "run_nonce": "live-run-nonce-0123456789abcdef",
+          "budget_reference": "budget://tenant/1",
+          "credential_reference": "credential://gateway/ref",
+          "issued_at": "2026-07-11T12:28:00Z",
+          "expires_at": "2026-07-11T12:35:00Z",
+          "trust_epoch": 7,
+          "signature": {
+            "algorithm": "ed25519",
+            "purpose": "live-run-authorization",
+            "issuer": "mission-live-authorization",
+            "key_id": "authorization-key",
+            "value": "7OEZb7Gr_2W2xR6A4_lXu7nTz20zuCXNiLRXHd2LEhXQBrpU5pbUhMG9TQxlEoXjvL3Q3NMErSPBu4pIRWu6Cg"
+          }
+        },
+        "live_receipt": {
+          "protocol_version": "mission-control.provider.v1alpha1",
+          "receipt_id": "live-receipt-1",
+          "authorization_id": "live-authorization-1",
+          "subject": {
+            "provider": {
+              "id": "sandbox-worker",
+              "version": "0.1.0",
+              "digest": "sha256:5c4c1964340aca5b65393bbe9d3249cdd71be26665b3320ad694f034f2743283"
+            },
+            "native_artifact": {
+              "id": "native-cli",
+              "version": "2.0.0",
+              "digest": "sha256:bef32d2c315a289576f2a6828d27edb16bb316a4d85c271f2d794045f3ea668d"
+            },
+            "platform": {
+              "os": "linux",
+              "architecture": "amd64"
+            },
+            "capabilities": [
+              "provider.initialize",
+              "harness.launch"
+            ],
+            "cases": [
+              "initialize",
+              "launch"
+            ],
+            "suite_version": "v0.1.0",
+            "suite_digest": "sha256:f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+            "configuration_digest": "sha256:b79606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910",
+            "data_modes": [
+              "metadata-only"
+            ]
+          },
+          "tenant_id": "tenant_1",
+          "gateway_id": "gateway_customer_7",
+          "correlation_id": "correlation_1",
+          "run_nonce": "live-run-nonce-0123456789abcdef",
+          "budget_reference": "budget://tenant/1",
+          "credential_reference": "credential://gateway/ref",
+          "result": "passed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "cost_microunits": 200
+          },
+          "audit_event_id": "audit-event-1",
+          "issued_at": "2026-07-11T12:29:00Z",
+          "signature": {
+            "algorithm": "ed25519",
+            "purpose": "live-run-receipt",
+            "issuer": "gateway_customer_7",
+            "key_id": "gateway-evidence-key",
+            "value": "TftHab3IuCmA4qirTwV5_pvmWBGgkRtehkWBCVeJxPdn8vBwT2A9G2TBVUXpBWeItIgSE3fOZvuxVHdXfj_-Bw"
+          }
+        },
+        "signature": {
+          "algorithm": "ed25519",
+          "purpose": "live-verification",
+          "issuer": "mission-verification",
+          "key_id": "live-key",
+          "value": "-lLKvfGtEkNM2aNlKfcr24ynCJPKE16qJ4yUQq8J00B0vzzERGmM3AwPi9e5_OEcJl33s2T3zVE2pLl47qraCQ"
+        }
+      },
+      "preimage_base64url": "bWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExAGxpdmUtdmVyaWZpY2F0aW9uAHsicHJvdG9jb2xfdmVyc2lvbiI6Im1pc3Npb24tY29udHJvbC5wcm92aWRlci52MWFscGhhMSIsImV2aWRlbmNlX2lkIjoidmVyaWZpY2F0aW9uLWxpdmUiLCJ0aWVyIjoibGl2ZV92ZXJpZmllZCIsInN1YmplY3QiOnsicHJvdmlkZXIiOnsiaWQiOiJzYW5kYm94LXdvcmtlciIsInZlcnNpb24iOiIwLjEuMCIsImRpZ2VzdCI6InNoYTI1Njo1YzRjMTk2NDM0MGFjYTViNjUzOTNiYmU5ZDMyNDljZGQ3MWJlMjY2NjViMzMyMGFkNjk0ZjAzNGYyNzQzMjgzIn0sIm5hdGl2ZV9hcnRpZmFjdCI6eyJpZCI6Im5hdGl2ZS1jbGkiLCJ2ZXJzaW9uIjoiMi4wLjAiLCJkaWdlc3QiOiJzaGEyNTY6YmVmMzJkMmMzMTVhMjg5NTc2ZjJhNjgyOGQyN2VkYjE2YmIzMTZhNGQ4NWMyNzFmMmQ3OTQwNDVmM2VhNjY4ZCJ9LCJwbGF0Zm9ybSI6eyJvcyI6ImxpbnV4IiwiYXJjaGl0ZWN0dXJlIjoiYW1kNjQifSwiY2FwYWJpbGl0aWVzIjpbImhhcm5lc3MubGF1bmNoIiwicHJvdmlkZXIuaW5pdGlhbGl6ZSJdLCJjYXNlcyI6WyJpbml0aWFsaXplIiwibGF1bmNoIl0sInN1aXRlX3ZlcnNpb24iOiJ2MC4xLjAiLCJzdWl0ZV9kaWdlc3QiOiJzaGEyNTY6ZjhlYmQ0M2RiZWYxZjAyOWJmNDkzMGM2NWM5YjdjNWNjNzZhZjQ3NjkyN2NlZTg2MWZmMThmY2M3M2JmYzRhYiIsImNvbmZpZ3VyYXRpb25fZGlnZXN0Ijoic2hhMjU2OmI3OTYwNmZiM2FmZWE1YmQxNjA5ZWQ0MGI2MjIxNDJmMWM5ODEyNWFiY2ZlODlhNzZhNjYxYjBlOGUzNDM5MTAiLCJkYXRhX21vZGVzIjpbIm1ldGFkYXRhLW9ubHkiXX0sInJlc3VsdCI6InBhc3NlZCIsInJlZmVyZW5jZSI6ImV2aWRlbmNlOi8vbWlzc2lvbi92ZXJpZmljYXRpb24vbGl2ZSIsImlzc3VlZF9hdCI6IjIwMjYtMDctMTFUMTI6Mjk6MzBaIiwiZXhwaXJlc19hdCI6IjIwMjYtMDctMTFUMTM6MzA6MDBaIiwidHJ1c3RfZXBvY2giOjcsImxpdmVfYXV0aG9yaXphdGlvbiI6eyJwcm90b2NvbF92ZXJzaW9uIjoibWlzc2lvbi1jb250cm9sLnByb3ZpZGVyLnYxYWxwaGExIiwiYXV0aG9yaXphdGlvbl9pZCI6ImxpdmUtYXV0aG9yaXphdGlvbi0xIiwic3ViamVjdCI6eyJwcm92aWRlciI6eyJpZCI6InNhbmRib3gtd29ya2VyIiwidmVyc2lvbiI6IjAuMS4wIiwiZGlnZXN0Ijoic2hhMjU2OjVjNGMxOTY0MzQwYWNhNWI2NTM5M2JiZTlkMzI0OWNkZDcxYmUyNjY2NWIzMzIwYWQ2OTRmMDM0ZjI3NDMyODMifSwibmF0aXZlX2FydGlmYWN0Ijp7ImlkIjoibmF0aXZlLWNsaSIsInZlcnNpb24iOiIyLjAuMCIsImRpZ2VzdCI6InNoYTI1NjpiZWYzMmQyYzMxNWEyODk1NzZmMmE2ODI4ZDI3ZWRiMTZiYjMxNmE0ZDg1YzI3MWYyZDc5NDA0NWYzZWE2NjhkIn0sInBsYXRmb3JtIjp7Im9zIjoibGludXgiLCJhcmNoaXRlY3R1cmUiOiJhbWQ2NCJ9LCJjYXBhYmlsaXRpZXMiOlsiaGFybmVzcy5sYXVuY2giLCJwcm92aWRlci5pbml0aWFsaXplIl0sImNhc2VzIjpbImluaXRpYWxpemUiLCJsYXVuY2giXSwic3VpdGVfdmVyc2lvbiI6InYwLjEuMCIsInN1aXRlX2RpZ2VzdCI6InNoYTI1NjpmOGViZDQzZGJlZjFmMDI5YmY0OTMwYzY1YzliN2M1Y2M3NmFmNDc2OTI3Y2VlODYxZmYxOGZjYzczYmZjNGFiIiwiY29uZmlndXJhdGlvbl9kaWdlc3QiOiJzaGEyNTY6Yjc5NjA2ZmIzYWZlYTViZDE2MDllZDQwYjYyMjE0MmYxYzk4MTI1YWJjZmU4OWE3NmE2NjFiMGU4ZTM0MzkxMCIsImRhdGFfbW9kZXMiOlsibWV0YWRhdGEtb25seSJdfSwidGVuYW50X2lkIjoidGVuYW50XzEiLCJnYXRld2F5X2lkIjoiZ2F0ZXdheV9jdXN0b21lcl83IiwiZ2F0ZXdheV9rZXlfaWQiOiJnYXRld2F5LWV2aWRlbmNlLWtleSIsImNvcnJlbGF0aW9uX2lkIjoiY29ycmVsYXRpb25fMSIsInJ1bl9ub25jZSI6ImxpdmUtcnVuLW5vbmNlLTAxMjM0NTY3ODlhYmNkZWYiLCJidWRnZXRfcmVmZXJlbmNlIjoiYnVkZ2V0Oi8vdGVuYW50LzEiLCJjcmVkZW50aWFsX3JlZmVyZW5jZSI6ImNyZWRlbnRpYWw6Ly9nYXRld2F5L3JlZiIsImlzc3VlZF9hdCI6IjIwMjYtMDctMTFUMTI6Mjg6MDBaIiwiZXhwaXJlc19hdCI6IjIwMjYtMDctMTFUMTI6MzU6MDBaIiwidHJ1c3RfZXBvY2giOjcsInNpZ25hdHVyZSI6eyJhbGdvcml0aG0iOiJlZDI1NTE5IiwicHVycG9zZSI6ImxpdmUtcnVuLWF1dGhvcml6YXRpb24iLCJpc3N1ZXIiOiJtaXNzaW9uLWxpdmUtYXV0aG9yaXphdGlvbiIsImtleV9pZCI6ImF1dGhvcml6YXRpb24ta2V5IiwidmFsdWUiOiI3T0VaYjdHcl8yVzJ4UjZBNF9sWHU3blR6MjB6dUNYTmlMUlhIZDJMRWhYUUJycFU1cGJVaE1HOVRReGxFb1hqdkwzUTNOTUVyU1BCdTRwSVJXdTZDZyJ9fSwibGl2ZV9yZWNlaXB0Ijp7InByb3RvY29sX3ZlcnNpb24iOiJtaXNzaW9uLWNvbnRyb2wucHJvdmlkZXIudjFhbHBoYTEiLCJyZWNlaXB0X2lkIjoibGl2ZS1yZWNlaXB0LTEiLCJhdXRob3JpemF0aW9uX2lkIjoibGl2ZS1hdXRob3JpemF0aW9uLTEiLCJzdWJqZWN0Ijp7InByb3ZpZGVyIjp7ImlkIjoic2FuZGJveC13b3JrZXIiLCJ2ZXJzaW9uIjoiMC4xLjAiLCJkaWdlc3QiOiJzaGEyNTY6NWM0YzE5NjQzNDBhY2E1YjY1MzkzYmJlOWQzMjQ5Y2RkNzFiZTI2NjY1YjMzMjBhZDY5NGYwMzRmMjc0MzI4MyJ9LCJuYXRpdmVfYXJ0aWZhY3QiOnsiaWQiOiJuYXRpdmUtY2xpIiwidmVyc2lvbiI6IjIuMC4wIiwiZGlnZXN0Ijoic2hhMjU2OmJlZjMyZDJjMzE1YTI4OTU3NmYyYTY4MjhkMjdlZGIxNmJiMzE2YTRkODVjMjcxZjJkNzk0MDQ1ZjNlYTY2OGQifSwicGxhdGZvcm0iOnsib3MiOiJsaW51eCIsImFyY2hpdGVjdHVyZSI6ImFtZDY0In0sImNhcGFiaWxpdGllcyI6WyJoYXJuZXNzLmxhdW5jaCIsInByb3ZpZGVyLmluaXRpYWxpemUiXSwiY2FzZXMiOlsiaW5pdGlhbGl6ZSIsImxhdW5jaCJdLCJzdWl0ZV92ZXJzaW9uIjoidjAuMS4wIiwic3VpdGVfZGlnZXN0Ijoic2hhMjU2OmY4ZWJkNDNkYmVmMWYwMjliZjQ5MzBjNjVjOWI3YzVjYzc2YWY0NzY5MjdjZWU4NjFmZjE4ZmNjNzNiZmM0YWIiLCJjb25maWd1cmF0aW9uX2RpZ2VzdCI6InNoYTI1NjpiNzk2MDZmYjNhZmVhNWJkMTYwOWVkNDBiNjIyMTQyZjFjOTgxMjVhYmNmZTg5YTc2YTY2MWIwZThlMzQzOTEwIiwiZGF0YV9tb2RlcyI6WyJtZXRhZGF0YS1vbmx5Il19LCJ0ZW5hbnRfaWQiOiJ0ZW5hbnRfMSIsImdhdGV3YXlfaWQiOiJnYXRld2F5X2N1c3RvbWVyXzciLCJjb3JyZWxhdGlvbl9pZCI6ImNvcnJlbGF0aW9uXzEiLCJydW5fbm9uY2UiOiJsaXZlLXJ1bi1ub25jZS0wMTIzNDU2Nzg5YWJjZGVmIiwiYnVkZ2V0X3JlZmVyZW5jZSI6ImJ1ZGdldDovL3RlbmFudC8xIiwiY3JlZGVudGlhbF9yZWZlcmVuY2UiOiJjcmVkZW50aWFsOi8vZ2F0ZXdheS9yZWYiLCJyZXN1bHQiOiJwYXNzZWQiLCJ1c2FnZSI6eyJpbnB1dF90b2tlbnMiOjEwLCJvdXRwdXRfdG9rZW5zIjo0LCJjb3N0X21pY3JvdW5pdHMiOjIwMH0sImF1ZGl0X2V2ZW50X2lkIjoiYXVkaXQtZXZlbnQtMSIsImlzc3VlZF9hdCI6IjIwMjYtMDctMTFUMTI6Mjk6MDBaIiwic2lnbmF0dXJlIjp7ImFsZ29yaXRobSI6ImVkMjU1MTkiLCJwdXJwb3NlIjoibGl2ZS1ydW4tcmVjZWlwdCIsImlzc3VlciI6ImdhdGV3YXlfY3VzdG9tZXJfNyIsImtleV9pZCI6ImdhdGV3YXktZXZpZGVuY2Uta2V5IiwidmFsdWUiOiJUZnRIYWIzSXVDbUE0cWlyVHdWNV9wdm1XQkdna1J0ZWhrV0JDVmVKeFBkbjh2QndUMkE5RzJUQlZVWHBCV2VJdElnU0UzZk9adnV4VkhkWGZqXy1CdyJ9fSwic2lnbmF0dXJlIjp7ImFsZ29yaXRobSI6ImVkMjU1MTkiLCJwdXJwb3NlIjoibGl2ZS12ZXJpZmljYXRpb24iLCJpc3N1ZXIiOiJtaXNzaW9uLXZlcmlmaWNhdGlvbiIsImtleV9pZCI6ImxpdmUta2V5IiwidmFsdWUiOiIifX0",
+      "signature_base64url": "-lLKvfGtEkNM2aNlKfcr24ynCJPKE16qJ4yUQq8J00B0vzzERGmM3AwPi9e5_OEcJl33s2T3zVE2pLl47qraCQ"
+    }
+  ]
+}
