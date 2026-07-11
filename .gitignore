@@ -26,7 +26,20 @@ go.work.sum
 
 # env file
 .env
+.env.*
+!.env.example
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# Build and package output
+/bin/
+/dist/
+/sdk/typescript/dist/
+*.tgz
+
+# JavaScript dependencies
+node_modules/
+
+# Local development state
+.DS_Store
+.idea/
+.vscode/
+*.tmp

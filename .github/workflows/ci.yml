@@ -1,0 +1,79 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  go:
+    name: ci/go
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c  # v6.4.0
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Verify formatting
+        run: test -z "$(gofmt -l .)"
+      - name: Test version package
+        run: go test ./internal/version -race -count=1
+      - name: Vet
+        run: go vet ./...
+      - name: Lint
+        uses: golangci/golangci-lint-action@82606bf257cbaff209d206a39f5134f0cfbfd2ee  # v9.2.1
+        with:
+          version: v2.12.2
+          args: --new-from-rev=origin/main
+
+  security:
+    name: ci/security
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c  # v6.4.0
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Install pinned security tools
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@v1.6.0
+          go install github.com/google/go-licenses/v2@v2.0.1
+      - name: Verify dependencies
+        run: |
+          go mod download
+          go mod verify
+      - name: Check vulnerabilities
+        run: govulncheck ./...
+      - name: Check dependency licenses
+        run: >-
+          go-licenses check --include_tests
+          --disallowed_types=forbidden,restricted,reciprocal,unknown ./...
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e  # v4.36.2
+        with:
+          languages: go
+          build-mode: manual
+      - name: Build for CodeQL
+        run: go build ./...
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e  # v4.36.2
+        with:
+          category: /language:go

@@ -1,0 +1,43 @@
+---
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions: {}
+
+# Task 7 enables these tag-only publication jobs after the SDK commands,
+# package manifest, SBOM inputs, and GoReleaser configuration exist. Until then,
+# these guard jobs reject every release tag before checking out code or invoking
+# a publisher, preventing incomplete or falsely attested artifacts.
+jobs:
+  assets:
+    name: Release assets bootstrap guard
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: write
+      artifact-metadata: write
+      contents: write
+      id-token: write
+    steps:
+      - name: Reject release before SDK packaging exists
+        run: |
+          echo "release assets are intentionally disabled until Task 7" >&2
+          exit 1
+
+  npm:
+    name: npm publication bootstrap guard
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: write
+      artifact-metadata: write
+      contents: read
+      id-token: write
+      packages: write
+    steps:
+      - name: Reject release before the npm package exists
+        run: |
+          echo "npm publication is intentionally disabled until Task 7" >&2
+          exit 1
