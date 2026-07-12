@@ -67,7 +67,7 @@ func providerManifestSchema() map[string]any {
 			"roles":                array(enum("agent-harness", "session-runtime", "execution-environment", "orchestration"), 1, 4, true),
 			"name":                 boundedString(1, 256),
 			"version":              versionString(),
-			"executable":           map[string]any{"type": "string", "minLength": 1, "maxLength": 256, "pattern": `^[A-Za-z0-9][A-Za-z0-9._-]*$`},
+			"executable":           executableString(),
 			"platforms":            array(ref("#/$defs/platform"), 1, 32, true),
 			"capabilities":         array(ref("#/$defs/capability"), 1, 256, true),
 			"interaction_modes":    array(tokenString(1, 128), 1, 32, true),
@@ -1123,7 +1123,7 @@ func stateReportDefinition(axis string, states []string) map[string]any {
 	return closedObject([]string{"axis", "state", "source", "observed_at", "sequence", "confidence", "authority"}, map[string]any{
 		"axis":        constant(axis),
 		"state":       map[string]any{"type": "string", "enum": values},
-		"source":      idString(),
+		"source":      textString(1, 128),
 		"observed_at": timestamp(),
 		"sequence":    integer(1),
 		"confidence":  map[string]any{"type": "number", "minimum": 0, "maximum": 1},
@@ -1492,6 +1492,19 @@ func enum(values ...string) map[string]any {
 
 func boundedString(minimum, maximum int) map[string]any {
 	return map[string]any{"type": "string", "minLength": minimum, "maxLength": maximum}
+}
+
+func textString(minimum, maximum int) map[string]any {
+	value := boundedString(minimum, maximum)
+	value["pattern"] = `^[^\x00\r\n]+$`
+	return value
+}
+
+func executableString() map[string]any {
+	value := textString(1, 256)
+	value["pattern"] = `^[^/\\\x00\r\n]+$`
+	value["not"] = enum(".", "..")
+	return value
 }
 
 func idString() map[string]any {

@@ -265,6 +265,67 @@ func TestProviderManifestConfigurationSchemaIsLocal(t *testing.T) {
 	}
 }
 
+func TestGeneratedSchemasMatchGoTextSemantics(t *testing.T) {
+	t.Parallel()
+
+	manifest := decodeFixture[protocol.ProviderManifest](t, "valid", "provider-manifest-runtime.json")
+	manifestSchema := readSchema(t, "provider-manifest.v1alpha1.schema.json")
+	for _, executable := range []string{"my provider", "..."} {
+		candidate := manifest
+		candidate.Executable = executable
+		if err := candidate.Validate(); err != nil {
+			t.Fatalf("Go rejected executable %q: %v", executable, err)
+		}
+		data, err := json.Marshal(candidate)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := validateRawSchema(manifestSchema, manifestSchema, data); err != nil {
+			t.Errorf("generated schema rejected Go-valid executable %q: %v", executable, err)
+		}
+	}
+	for _, executable := range []string{".", "..", "bin/provider", `bin\provider`, "provider\nname"} {
+		candidate := manifest
+		candidate.Executable = executable
+		if err := candidate.Validate(); err == nil {
+			t.Fatalf("Go accepted invalid executable %q", executable)
+		}
+		data, err := json.Marshal(candidate)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := validateRawSchema(manifestSchema, manifestSchema, data); err == nil {
+			t.Errorf("generated schema accepted invalid executable %q", executable)
+		}
+	}
+
+	session := decodeFixture[protocol.Session](t, "valid", "session-terminal.json")
+	session.Lifecycle.Source = "human operator"
+	if err := session.Validate(); err != nil {
+		t.Fatalf("Go rejected state source containing spaces: %v", err)
+	}
+	data, err := json.Marshal(session)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sessionSchema := readSchema(t, "session.v1alpha1.schema.json")
+	if err := validateRawSchema(sessionSchema, sessionSchema, data); err != nil {
+		t.Fatalf("generated schema rejected Go-valid state source: %v", err)
+	}
+
+	session.Lifecycle.Source = "human\noperator"
+	if err := session.Validate(); err == nil {
+		t.Fatal("Go accepted a state source containing a newline")
+	}
+	data, err = json.Marshal(session)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := validateRawSchema(sessionSchema, sessionSchema, data); err == nil {
+		t.Fatal("generated schema accepted a state source containing a newline")
+	}
+}
+
 func TestProviderInitializationNegotiatesPlatformAndLimits(t *testing.T) {
 	t.Parallel()
 
