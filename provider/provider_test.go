@@ -606,12 +606,25 @@ func TestSubscriptionContextPersistsUntilUnsubscribe(t *testing.T) {
 		}
 		time.Sleep(time.Millisecond)
 	}
+	activeSubscription := int(subscriptions.Load())
+	canceledProvisional := make(map[int]bool, activeSubscription-2)
+	for len(canceledProvisional) < activeSubscription-2 {
+		select {
+		case subscription := <-subscriptionCancelled:
+			if subscription < 2 || subscription >= activeSubscription || canceledProvisional[subscription] {
+				t.Fatalf("unexpected canceled provisional subscription %d (active %d)", subscription, activeSubscription)
+			}
+			canceledProvisional[subscription] = true
+		case <-time.After(time.Second):
+			t.Fatalf("only %d of %d provisional subscriptions were canceled", len(canceledProvisional), activeSubscription-2)
+		}
+	}
 	if err := client.Mutate(ctx, unsubscribe, &protocol.OperationResult{}); err != nil {
 		t.Fatalf("cached unsubscribe retry: %v", err)
 	}
 	select {
 	case subscription := <-subscriptionCancelled:
-		t.Fatalf("cached unsubscribe retry canceled reused subscription %d", subscription)
+		t.Fatalf("cached unsubscribe retry canceled reused subscription %d (active %d)", subscription, activeSubscription)
 	case <-time.After(25 * time.Millisecond):
 	}
 	if _, err := client.Capabilities(ctx); err != nil {
