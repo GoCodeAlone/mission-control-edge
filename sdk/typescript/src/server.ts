@@ -619,13 +619,19 @@ export class ProviderServer {
     }
     this.#initializingRequestId = requestId;
     const request = parameter as unknown as ProviderInitializeRequest;
+    const advertisedCapabilities = this.#advertisedCapabilities();
+    if (!request.supported_protocol_versions.includes(PROTOCOL_VERSION)) {
+      throw notSupported("provider.initialize", advertisedCapabilities);
+    }
+    for (const required of request.required_capabilities) {
+      if (!advertisedCapabilities.includes(required)) {
+        throw notSupported(required, advertisedCapabilities);
+      }
+    }
     const authenticationMode = this.#config.authenticationModes.find((mode) =>
       request.authentication_modes.includes(mode),
     );
     if (authenticationMode === undefined) throw protocolError("unauthenticated");
-    if (!request.supported_protocol_versions.includes(PROTOCOL_VERSION)) {
-      throw notSupported("provider.initialize", this.#advertisedCapabilities());
-    }
     const experimentalFeatures = (this.#config.experimentalFeatures ?? []).filter((feature) =>
       request.experimental_features.includes(feature),
     );

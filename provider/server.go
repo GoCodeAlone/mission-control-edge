@@ -667,6 +667,18 @@ func (c *serverConnection) execute(ctx context.Context, method string, raw json.
 }
 
 func (c *serverConnection) initialize(ctx context.Context, request protocol.ProviderInitializeRequest, raw json.RawMessage) (protocol.ProviderInitializeResult, error) {
+	if err := request.Validate(); err != nil {
+		return protocol.ProviderInitializeResult{}, newProtocolError(protocol.CodeInvalidArgument)
+	}
+	advertised := manifestCapabilities(c.server.config.Manifest)
+	if !slices.Contains(request.SupportedProtocolVersions, protocol.Version) {
+		return protocol.ProviderInitializeResult{}, notSupported("provider.initialize", advertised)
+	}
+	for _, required := range request.RequiredCapabilities {
+		if !c.server.config.Manifest.Supports(required) {
+			return protocol.ProviderInitializeResult{}, notSupported(required, advertised)
+		}
+	}
 	if c.server.handlers.Provider.Initialize != nil {
 		value, err := c.server.handlers.dispatch(ctx, "provider.initialize", nil, raw)
 		if err != nil {
@@ -683,12 +695,6 @@ func (c *serverConnection) initialize(ctx context.Context, request protocol.Prov
 			return protocol.ProviderInitializeResult{}, err
 		}
 		return result, nil
-	}
-	if err := request.Validate(); err != nil {
-		return protocol.ProviderInitializeResult{}, newProtocolError(protocol.CodeInvalidArgument)
-	}
-	if !slices.Contains(request.SupportedProtocolVersions, protocol.Version) {
-		return protocol.ProviderInitializeResult{}, notSupported("provider.initialize", manifestCapabilities(c.server.config.Manifest))
 	}
 	authentication := ""
 	for _, supported := range c.server.config.AuthenticationModes {

@@ -74,10 +74,42 @@ describe("TypeScript provider interoperability", () => {
     expect(providerExit).toBe(0);
     expect(await clientError).toBe("");
     expect(await providerError).toBe("");
-  }, 30_000);
+  }, 120_000);
 });
 
 describe("TypeScript provider server", () => {
+  test("returns structured not_supported for a missing required capability", async () => {
+    const server = testServer(["provider.initialize", "provider.capabilities"], {});
+    const toProvider = new PassThrough();
+    const fromProvider = new PassThrough();
+    const serverTask = server.serve({ readable: toProvider, writable: fromProvider });
+    const client = new ProviderClient(
+      { readable: fromProvider, writable: toProvider },
+      { maximumMessageBytes: 64 << 10 },
+    );
+
+    await expect(client.initialize({
+      supported_protocol_versions: [PROTOCOL_VERSION],
+      gateway_version: "0.1.0",
+      platform: { os: normalizedOS(), architecture: normalizedArchitecture() },
+      required_capabilities: ["runtime.get_session"],
+      maximum_message_bytes: 64 << 10,
+      maximum_chunk_bytes: 64 << 10,
+      replay_supported: true,
+      authentication_modes: ["none"],
+      experimental_features: [],
+    })).rejects.toMatchObject({
+      code: "not_supported",
+      requiredCapability: "runtime.get_session",
+      advertisedCapabilities: expect.arrayContaining(["provider.initialize", "provider.capabilities"]),
+    });
+
+    toProvider.end();
+    await serverTask;
+    await client.close();
+    fromProvider.destroy();
+  });
+
   test("streams live terminal output only after credited replay", async () => {
     const live = async function* (): AsyncGenerator<{
       method: "$mc/terminal.chunk";

@@ -14,6 +14,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"slices"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -1198,7 +1199,7 @@ func TestInitializationRejectsIncompatibleNegotiation(t *testing.T) {
 		}, code: protocol.CodeUnauthenticated},
 		{name: "required capability", mutate: func(request *protocol.ProviderInitializeRequest) {
 			request.RequiredCapabilities = []protocol.CapabilityName{"runtime.get_session"}
-		}, code: protocol.CodeInvalidArgument},
+		}, code: protocol.CodeNotSupported},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
@@ -1217,8 +1218,22 @@ func TestInitializationRejectsIncompatibleNegotiation(t *testing.T) {
 			defer closeProviderClient(t, client)
 			request := testInitializeRequest(manifest)
 			test.mutate(&request)
-			if _, err := client.Initialize(ctx, request); !protocol.IsCode(err, test.code) {
-				t.Fatalf("Initialize error = %v, want %s", err, test.code)
+			_, initializeErr := client.Initialize(ctx, request)
+			if !protocol.IsCode(initializeErr, test.code) {
+				t.Fatalf("Initialize error = %v, want %s", initializeErr, test.code)
+			}
+			if test.code == protocol.CodeNotSupported {
+				var structured *protocol.Error
+				if !errors.As(initializeErr, &structured) {
+					t.Fatalf("Initialize error = %T, want structured protocol error", initializeErr)
+				}
+				required := protocol.CapabilityName("provider.initialize")
+				if test.name == "required capability" {
+					required = "runtime.get_session"
+				}
+				if structured.RequiredCapability != required || !slices.Contains(structured.AdvertisedCapabilities, "provider.capabilities") {
+					t.Fatalf("not_supported data = %#v, want required %q and advertised capabilities", structured, required)
+				}
 			}
 		})
 	}
