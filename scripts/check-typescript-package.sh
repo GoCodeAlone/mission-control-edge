@@ -3,7 +3,7 @@ set -euo pipefail
 export LANG=C
 export LC_ALL=C
 
-repository_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+repository_root=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 package_root="$repository_root/sdk/typescript"
 temporary_directory=$(mktemp -d)
 trap 'rm -rf "$temporary_directory"' EXIT
