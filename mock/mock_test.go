@@ -61,6 +61,23 @@ func TestFaultsAreDeterministicAndComposable(t *testing.T) {
 	}
 }
 
+func TestFaultDuplicateOutputIsBounded(t *testing.T) {
+	t.Parallel()
+
+	faults, err := mock.NewFaults(
+		mock.Fault{Point: mock.PointControlPlaneIngest, Occurrence: 1, Action: mock.ActionDuplicate, Copies: 16},
+		mock.Fault{Point: mock.PointControlPlaneIngest, Occurrence: 1, Action: mock.ActionDuplicate, Copies: 16},
+		mock.Fault{Point: mock.PointControlPlaneIngest, Occurrence: 1, Action: mock.ActionDuplicate, Copies: 16},
+	)
+	if err != nil {
+		t.Fatalf("NewFaults: %v", err)
+	}
+
+	if _, err := faults.Apply(context.Background(), mock.PointControlPlaneIngest, []byte("frame")); err == nil {
+		t.Fatal("duplicate fault expansion succeeded beyond the output limit")
+	}
+}
+
 func TestFaultWaitsHonorCancellation(t *testing.T) {
 	t.Parallel()
 

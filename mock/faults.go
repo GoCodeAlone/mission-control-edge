@@ -38,6 +38,8 @@ const (
 	ActionRedact       FaultAction = "redact"
 )
 
+const maxFaultOutputFrames = 1 << 10
+
 var (
 	ErrDisconnected = errors.New("mock boundary disconnected")
 	ErrCrash        = errors.New("mock provider crash")
@@ -179,6 +181,9 @@ func (f *Faults) Apply(ctx context.Context, point FaultPoint, payload []byte) ([
 				return nil, ctx.Err()
 			}
 		case ActionDuplicate:
+			if step.Copies < 2 || step.Copies > 16 || len(frames) > maxFaultOutputFrames/step.Copies {
+				return nil, fmt.Errorf("mock duplicate output exceeds frame limit")
+			}
 			duplicated := make([][]byte, 0, len(frames)*step.Copies)
 			for _, frame := range frames {
 				for range step.Copies {

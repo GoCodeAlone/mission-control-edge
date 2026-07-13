@@ -280,12 +280,28 @@ func signingPreimage(purpose string, document any) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	result := make([]byte, 0, len(signingDomainPrefix)+len(purpose)+1+len(payload))
+	capacity, err := checkedAllocationSize(len(signingDomainPrefix), len(purpose), 1, len(payload))
+	if err != nil {
+		return nil, fmt.Errorf("signing preimage: %w", err)
+	}
+	result := make([]byte, 0, capacity)
 	result = append(result, signingDomainPrefix...)
 	result = append(result, purpose...)
 	result = append(result, 0)
 	result = append(result, payload...)
 	return result, nil
+}
+
+func checkedAllocationSize(parts ...int) (int, error) {
+	maxInt := int(^uint(0) >> 1)
+	total := 0
+	for _, size := range parts {
+		if size < 0 || size > maxInt-total {
+			return 0, fmt.Errorf("allocation size exceeds platform limit")
+		}
+		total += size
+	}
+	return total, nil
 }
 
 func validateSignedArtifact(field string, artifact ArtifactIdentity) error {
