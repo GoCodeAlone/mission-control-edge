@@ -82,9 +82,24 @@ fi
 umask 077
 temporary_root=$(mktemp -d "${TMPDIR:-/tmp}/mission-control-clean-consumer.XXXXXX")
 cleanup() {
-  rm -rf "$temporary_root"
+  status=$?
+  trap - EXIT INT TERM
+  if [[ -d "$temporary_root/gomodcache" ]] && \
+    ! GOMODCACHE="$temporary_root/gomodcache" GOWORK=off go clean -modcache >/dev/null 2>&1; then
+    chmod -R u+w "$temporary_root/gomodcache" 2>/dev/null || true
+    if ! rm -rf "$temporary_root/gomodcache"; then
+      status=1
+    fi
+  fi
+  if ! rm -rf "$temporary_root"; then
+    printf 'clean_consumer_proof_failed: could not remove temporary consumer\n' >&2
+    status=1
+  fi
+  exit "$status"
 }
-trap cleanup EXIT INT TERM
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 case "$temporary_root" in
   "$repo_root"|"$repo_root"/*)
