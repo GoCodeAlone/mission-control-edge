@@ -14,10 +14,42 @@ providers are isolated processes and are not Workflow plugins.
 
 ## Status
 
-This repository is in its Phase 0 bootstrap. The only implemented package
-reports build metadata and the supported protocol range,
-`mission-control.provider.v1alpha1`. Protocol schemas, SDKs, conformance tests,
-gateway behavior, and reference providers will arrive in subsequent changes.
+The v0.1 SDK foundation implements the provider-neutral
+`mission-control.provider.v1alpha1` contract, generated JSON Schema and OpenRPC
+documents, Go and TypeScript provider SDKs, mock boundaries, and an external-
+process conformance suite. Gateway supervision, durable local state, and
+runtime/harness providers remain later phases; none are implied by the SDK
+release.
+
+The control plane is intentionally built as a
+[Workflow](https://github.com/GoCodeAlone/workflow) application and will reuse
+Workflow modules and plugins for routing, schedules, approvals, persistence,
+observability, and deployment. Provider processes stay behind this repository's
+language-neutral protocol boundary instead of becoming Workflow plugins.
+
+## Provider SDKs
+
+Go consumers can depend on the public protocol, provider, and conformance
+packages directly:
+
+```sh
+GOWORK=off go get github.com/GoCodeAlone/mission-control-edge@v0.1.0
+```
+
+The TypeScript SDK is published to GitHub Packages. GitHub's npm registry
+requires authentication even for public packages:
+
+```sh
+export NODE_AUTH_TOKEN="$(gh auth token)"
+npm install @gocodealone/mission-control-provider-sdk@0.1.0 \
+  --registry=https://npm.pkg.github.com
+```
+
+See [provider authoring](docs/provider-authoring.md), the
+[conformance guide](docs/conformance.md), and the
+[compatibility policy](docs/protocol/compatibility.md) before advertising a
+capability. Released archives include `mc-schema`, `mc-provider-example`, and
+`mc-conformance` for Linux and macOS on amd64 and arm64.
 
 ## Provider and trust boundary
 
@@ -42,6 +74,16 @@ contains `go.work`, disable the parent workspace so checks use this module:
 GOWORK=off go test ./... -race -count=1
 GOWORK=off go vet ./...
 GOWORK=off golangci-lint run --new-from-rev=origin/main
+npm --prefix sdk/typescript ci
+npm --prefix sdk/typescript test
+```
+
+After a candidate commit is reachable from GitHub, prove both SDKs from fresh
+consumer directories with:
+
+```sh
+scripts/clean-consumer-proof.sh --go-ref "$(git rev-parse HEAD)" \
+  --npm-spec ./sdk/typescript
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete bootstrap checks and

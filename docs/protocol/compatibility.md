@@ -70,3 +70,44 @@ Released v1alpha1 SDKs may receive backward-compatible validation tightening
 for inputs that were already invalid. Changing framing, field meaning, delivery
 class, signature purpose, or an accepted enum requires a new protocol
 namespace. Unknown structured error codes are preserved and handled as failure.
+
+## Release compatibility
+
+Release `v0.1.0` is the first public SDK and conformance release for
+`mission-control.provider.v1alpha1`. The Go module, npm package, generated
+schemas, command-line tools, and embedded conformance matrix in that release
+describe one contract. Mixing those artifacts across versions is unsupported
+unless a later release explicitly records the combination as compatible.
+
+The alpha namespace is not a promise of source compatibility across future
+protocol namespaces. Within a released namespace, patch releases preserve
+valid wire behavior and may reject inputs that were already outside the
+published schema. Additive optional fields remain forward-tolerant, while new
+required fields, capabilities, signing inputs, delivery semantics, or enum
+values require negotiation through a new namespace or capability.
+
+Providers advertise their SDK and native runtime versions separately. A
+gateway must select the exact negotiated protocol namespace and treat the
+provider's native version as opaque diagnostic data, not as a substitute for
+capability negotiation.
+
+## Clean-consumer proof
+
+The repository's `scripts/clean-consumer-proof.sh` resolves the Go module by a
+public tag or remotely reachable commit with `GOWORK=off`, rejects module
+replacement, and compiles a provider using only the public `protocol`,
+`provider`, and `conformance` packages. It separately installs an npm tarball
+into a new project, rejects `file:`, `link:`, `workspace:`, absolute, and sibling
+dependencies, compiles a TypeScript provider, and runs the released conformance
+command against that provider.
+
+For a release, pass `--verify-attestations`. The proof downloads the exact npm
+tarball, verifies repository- and tag-bound provenance plus its SPDX 2.3
+attestation, and requires the locally computed SHA-256 digest to match the
+subject in both signed statements. It never uses a sibling checkout or an npm
+workspace alias as release evidence.
+
+GitHub Packages requires an authenticated npm client even when the package is
+public. Supply `NODE_AUTH_TOKEN`, `GH_TOKEN`, or an authenticated `gh` CLI; the
+proof writes the credential only to its permission-restricted temporary npm
+configuration and removes the directory on exit.
