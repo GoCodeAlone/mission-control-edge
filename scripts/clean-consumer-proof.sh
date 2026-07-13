@@ -8,6 +8,7 @@ registry="https://npm.pkg.github.com"
 go_ref=""
 npm_spec=""
 expected_npm_version="0.1.0"
+conformance_timeout="60s"
 verify_attestations=false
 
 usage() {
@@ -17,6 +18,7 @@ Usage: scripts/clean-consumer-proof.sh [options]
   --go-ref REF                  Public Go tag or remotely reachable commit
   --npm-spec SPEC               Local SDK directory or published package spec
   --expected-npm-version VER    Expected package version (default: 0.1.0)
+  --conformance-timeout DUR     Per-case outer timeout (default: 60s)
   --verify-attestations         Verify release provenance and SPDX attestations
   --help                        Show this help
 
@@ -51,6 +53,11 @@ while (($# > 0)); do
     --expected-npm-version)
       (($# >= 2)) || fail "--expected-npm-version requires a value"
       expected_npm_version=$2
+      shift 2
+      ;;
+    --conformance-timeout)
+      (($# >= 2)) || fail "--conformance-timeout requires a value"
+      conformance_timeout=$2
       shift 2
       ;;
     --verify-attestations)
@@ -356,9 +363,21 @@ EOF
 (
   cd "$typescript_consumer"
   ./node_modules/.bin/tsc -p tsconfig.json
-  "$temporary_root/bin/mc-conformance" \
+  if ! "$temporary_root/bin/mc-conformance" \
     --provider "node dist/provider.js" \
-    --json "$temporary_root/typescript-conformance.json"
+    --json "$temporary_root/typescript-conformance.json" \
+    --timeout "$conformance_timeout"; then
+    if [[ -s "$temporary_root/typescript-conformance.json" ]]; then
+      node - "$temporary_root/typescript-conformance.json" <<'NODE' || true
+const fs = require("node:fs");
+const report = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+for (const result of report.results.filter(candidate => candidate.status === "failed")) {
+  process.stderr.write(`conformance_failed_case: ${result.id} ${result.error_code ?? ""} ${result.summary ?? ""}\n`);
+}
+NODE
+    fi
+    fail "TypeScript provider conformance failed"
+  fi
 )
 node - "$temporary_root/typescript-conformance.json" <<'NODE'
 const fs = require("node:fs");
