@@ -1,0 +1,19 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "id": "direct-pty",
+  "roles": ["session-runtime"],
+  "name": "Direct PTY Runtime",
+  "version": "0.1.0",
+  "executable": "mission-control-provider-direct-pty",
+  "platforms": [{"os": "darwin", "architecture": "arm64"}],
+  "capabilities": [
+    {"name": "provider.initialize", "role": "provider"},
+    {"name": "runtime.create_session", "role": "session-runtime", "mutating": true, "delivery_class": "state_reconciled"},
+    {"name": "runtime.stop_session", "role": "session-runtime", "mutating": true, "delivery_class": "provider_idempotent"},
+    {"name": "terminal.send_input", "role": "session-runtime", "mutating": true, "delivery_class": "at_most_once"}
+  ],
+  "interaction_modes": ["stdio-jsonrpc", "terminal"],
+  "permissions": ["local_process", "terminal_io"],
+  "configuration_schema": "schema.json",
+  "extensions": {}
+}

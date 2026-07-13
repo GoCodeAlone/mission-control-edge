@@ -1,0 +1,61 @@
+{
+  "name": "@gocodealone/mission-control-provider-sdk",
+  "version": "0.1.0",
+  "description": "Provider-neutral TypeScript SDK for the Mission Control edge protocol",
+  "license": "Apache-2.0",
+  "author": "GoCodeAlone",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoCodeAlone/mission-control-edge.git",
+    "directory": "sdk/typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/GoCodeAlone/mission-control-edge/issues"
+  },
+  "homepage": "https://github.com/GoCodeAlone/mission-control-edge#readme",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./schema/*": "./dist/schema/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "build": "npm run clean && tsup src/index.ts --format esm,cjs --dts --sourcemap --tsconfig tsconfig.build.json --out-dir dist && tsup examples/provider.ts --format esm --sourcemap --tsconfig tsconfig.build.json --out-dir dist/examples && npm run stage:package",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "stage:package": "node -e \"const f=require('node:fs'),p=require('node:path');f.mkdirSync('dist/schema',{recursive:true});for(const n of ['command.v1alpha1.schema.json','event.v1alpha1.schema.json','openrpc.v1alpha1.json','provider-manifest.v1alpha1.schema.json','session.v1alpha1.schema.json'])f.copyFileSync(p.join('../../schema',n),p.join('dist/schema',n));for(const n of ['LICENSE','NOTICE','README.md'])f.copyFileSync(p.join('../..',n),p.join('dist',n))\"",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  },
+  "overrides": {
+    "esbuild": "0.28.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

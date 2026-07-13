@@ -1,0 +1,11 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "command_id": "command_1",
+  "session_id": "session_456",
+  "capability": "runtime.create_session",
+  "idempotency_key": "idempotency-0123456789abcdef",
+  "cancellation_token": "cancel-0123456789abcdef",
+  "deadline": "2026-07-11T12:30:00Z",
+  "delivery_class": "state_reconciled",
+  "payload": {"native_name": "opaque"}
+}

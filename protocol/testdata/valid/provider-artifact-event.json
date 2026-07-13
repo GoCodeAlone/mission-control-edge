@@ -1,0 +1,29 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "event_id": "artifact-event-1",
+  "provider_id": "agent-provider",
+  "role": "agent-harness",
+  "stream_id": "agent-stream",
+  "native_session_id": "native-session-1",
+  "type": "artifact.created",
+  "sequence": 1,
+  "observed_at": "2026-07-11T12:00:00Z",
+  "payload": {
+    "protocol_version": "mission-control.provider.v1alpha1",
+    "report_id": "report-1",
+    "provider_id": "agent-provider",
+    "role": "agent-harness",
+    "stream_id": "agent-stream",
+    "native_session_id": "native-session-1",
+    "native_artifact_id": "native-artifact-1",
+    "version": "1.0.0",
+    "locality": "upload-eligible",
+    "locator": "local-resource://gateway_customer_7/native-artifact-1",
+    "mime_type": "application/octet-stream",
+    "size": 4,
+    "digest": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+    "source_locators": [],
+    "extensions": {}
+  },
+  "extensions": {}
+}

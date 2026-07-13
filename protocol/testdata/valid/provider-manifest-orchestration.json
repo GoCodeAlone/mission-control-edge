@@ -1,0 +1,20 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "id": "workflow-orchestration",
+  "roles": ["orchestration"],
+  "name": "Workflow Orchestration Boundary",
+  "version": "0.1.0",
+  "executable": "mission-control-provider-workflow-orchestration",
+  "platforms": [{"os": "linux", "architecture": "amd64"}],
+  "capabilities": [
+    {"name": "provider.initialize", "role": "provider"},
+    {"name": "provider.health", "role": "provider"},
+    {"name": "provider.capabilities", "role": "provider"},
+    {"name": "provider.shutdown", "role": "provider", "mutating": true, "delivery_class": "provider_idempotent"},
+    {"name": "command.get_result", "role": "provider"}
+  ],
+  "interaction_modes": ["stdio-jsonrpc"],
+  "permissions": ["network_client"],
+  "configuration_schema": "schema.json",
+  "extensions": {}
+}

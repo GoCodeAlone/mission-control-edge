@@ -1,0 +1,36 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "approval_id": "approval-2",
+  "outcome": "rejected",
+  "binding": {
+    "command_digest": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+    "session_id": "session_456",
+    "session_revision": 6,
+    "work_item_revision": 2,
+    "resource_revision": 4,
+    "context_version": "context-v1",
+    "policy_revision": 8,
+    "environment": {
+      "role": "execution-environment",
+      "provider": {
+        "id": "sandbox-worker",
+        "version": "0.1.0",
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "harness": {
+      "role": "agent-harness",
+      "provider": {
+        "id": "spreadsheet-agent",
+        "version": "0.1.0",
+        "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    },
+    "gateway_id": "gateway_customer_7",
+    "scopes": ["session.create"],
+    "expires_at": "2026-07-11T12:35:00Z",
+    "nonce": "approval-nonce-fedcba9876543210"
+  },
+  "decision_revision": 4,
+  "decided_at": "2026-07-11T12:29:30Z"
+}

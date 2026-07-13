@@ -1,0 +1,12 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "session_id": "session_document_1",
+  "gateway_id": "gateway_customer_7",
+  "environment": {"provider_id": "secure-document-worker", "provider_version": "0.1.0", "native_id": "job-opaque", "artifact_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+  "harness": {"provider_id": "spreadsheet-agent", "provider_version": "0.1.0", "native_id": "document-run-opaque", "artifact_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"},
+  "lifecycle": {"axis": "lifecycle", "state": "running", "source": "environment-provider", "observed_at": "2026-07-11T12:00:00Z", "sequence": 1, "confidence": 1, "authority": "authoritative"},
+  "activity": {"axis": "activity", "state": "working", "source": "harness-provider", "observed_at": "2026-07-11T12:00:00Z", "sequence": 1, "confidence": 1, "authority": "authoritative"},
+  "health": {"axis": "health", "state": "healthy", "source": "gateway", "observed_at": "2026-07-11T12:00:00Z", "sequence": 1, "confidence": 1, "authority": "authoritative"},
+  "context_version": "context-v1",
+  "extensions": {}
+}

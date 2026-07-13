@@ -1,0 +1,19 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "id": "local-environment",
+  "roles": ["execution-environment"],
+  "name": "Local Execution Environment",
+  "version": "0.1.0",
+  "executable": "mission-control-provider-local-environment",
+  "platforms": [{"os": "linux", "architecture": "amd64"}],
+  "capabilities": [
+    {"name": "provider.initialize", "role": "provider"},
+    {"name": "environment.inspect", "role": "execution-environment"},
+    {"name": "environment.provision", "role": "execution-environment", "mutating": true, "delivery_class": "state_reconciled"},
+    {"name": "environment.shutdown", "role": "execution-environment", "mutating": true, "delivery_class": "provider_idempotent"}
+  ],
+  "interaction_modes": ["stdio-jsonrpc"],
+  "permissions": ["file_metadata", "local_process"],
+  "configuration_schema": "schema.json",
+  "extensions": {}
+}

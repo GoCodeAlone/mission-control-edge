@@ -1,0 +1,19 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "id": "local-composed-provider",
+  "roles": ["execution-environment", "session-runtime", "agent-harness"],
+  "name": "Local Composed Provider",
+  "version": "0.1.0",
+  "executable": "mission-control-provider-local-composed",
+  "platforms": [{"os": "linux", "architecture": "amd64"}],
+  "capabilities": [
+    {"name": "provider.initialize", "role": "provider"},
+    {"name": "environment.inspect", "role": "execution-environment"},
+    {"name": "runtime.create_session", "role": "session-runtime", "mutating": true, "delivery_class": "state_reconciled"},
+    {"name": "harness.launch", "role": "agent-harness", "mutating": true, "delivery_class": "at_most_once"}
+  ],
+  "interaction_modes": ["stdio-jsonrpc"],
+  "permissions": ["local_process"],
+  "configuration_schema": "schema.json",
+  "extensions": {}
+}

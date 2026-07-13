@@ -1,0 +1,19 @@
+{
+  "protocol_version": "mission-control.provider.v1alpha1",
+  "id": "generic-cli",
+  "roles": ["agent-harness"],
+  "name": "Generic CLI Harness",
+  "version": "0.1.0",
+  "executable": "mission-control-provider-generic-cli",
+  "platforms": [{"os": "linux", "architecture": "amd64"}],
+  "capabilities": [
+    {"name": "provider.initialize", "role": "provider"},
+    {"name": "harness.launch", "role": "agent-harness", "mutating": true, "delivery_class": "at_most_once"},
+    {"name": "agent.send_message", "role": "agent-harness", "mutating": true, "delivery_class": "at_most_once"},
+    {"name": "events.subscribe", "role": "provider"}
+  ],
+  "interaction_modes": ["cli", "stdio-jsonrpc"],
+  "permissions": ["local_process"],
+  "configuration_schema": "schema.json",
+  "extensions": {"example.dev/provider": {"channel": "stable"}}
+}

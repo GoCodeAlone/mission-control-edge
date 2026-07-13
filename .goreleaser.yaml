@@ -1,0 +1,103 @@
+---
+version: 2
+
+project_name: mission-control-edge
+
+builds:
+  - id: mc-schema
+    main: ./cmd/mc-schema
+    binary: mc-schema
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+  - id: mc-provider-example
+    main: ./cmd/mc-provider-example
+    binary: mc-provider-example
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+  - id: mc-conformance
+    main: ./cmd/mc-conformance
+    binary: mc-conformance
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+
+archives:
+  - id: sdk-tools
+    ids:
+      - mc-schema
+      - mc-provider-example
+      - mc-conformance
+    formats:
+      - tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - NOTICE
+      - README.md
+      - docs/provider-authoring.md
+      - docs/conformance.md
+      - docs/protocol/compatibility.md
+      - schema/*.json
+
+source:
+  enabled: true
+  name_template: "{{ .ProjectName }}_{{ .Version }}_source"
+  format: tar.gz
+  prefix_template: "{{ .ProjectName }}_{{ .Version }}/"
+
+sboms:
+  - id: archive-spdx
+    artifacts: archive
+    ids:
+      - sdk-tools
+    documents:
+      - "${artifact}.spdx.json"
+    cmd: syft
+    args:
+      - "${artifact}"
+      - --output
+      - "spdx-json=${document}"
+    disable: false
+  - id: source-spdx
+    artifacts: source
+    documents:
+      - "${artifact}.spdx.json"
+    cmd: syft
+    args:
+      - "${artifact}"
+      - --output
+      - "spdx-json=${document}"
+    disable: false
+
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256

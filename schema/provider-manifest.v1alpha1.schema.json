@@ -1,0 +1,2136 @@
+{
+  "$defs": {
+    "capability": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "agent.cancel"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "agent.get_native_identity"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "agent.get_pending_approvals"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "agent.get_state"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "agent.get_tools"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "agent.get_usage"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "agent.interrupt"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "agent.send_message"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "approval.approve"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "approval.expire"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "approval.list"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "approval.reject"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "artifact.list"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "artifact.register"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "command.get_result"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "context.confirm"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "context.deliver"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "environment.health"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "environment.inspect"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "environment.mount"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "environment.provision"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "environment.shutdown"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "execution-environment"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "events.subscribe"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "events.unsubscribe"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "harness.inspect"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "harness.launch"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "harness.list"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "harness.resume"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "harness.stop"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "agent-harness"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "pane.close"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "pane.create"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "pane.focus"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "pane.get"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "pane.list"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "pane.resize"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "pane.split"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "provider.capabilities"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "provider.health"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "provider.initialize"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "provider.shutdown"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "provider"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.adopt"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.archive"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.attach"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.checkpoint"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.clone"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.create_session"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.detach"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.export"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.fork"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "runtime.get_session"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.import"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "runtime.list_sessions"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.migrate"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.restore"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.resume"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "runtime.snapshot"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.stop_session"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "runtime.terminate_session"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "terminal.attach"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "terminal.detach"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "terminal.read"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "terminal.resize"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "terminal.send_input"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "at_most_once"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "terminal.send_keys"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "terminal.subscribe"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "topology.get"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "topology.subscribe"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "provider_idempotent"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "workspace.close"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delivery_class": {
+              "const": "state_reconciled"
+            },
+            "mutating": {
+              "const": true
+            },
+            "name": {
+              "const": "workspace.create"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role",
+            "mutating",
+            "delivery_class"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "workspace.get"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "const": false
+            },
+            "name": {
+              "const": "workspace.list"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "const": "session-runtime"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "else": {
+                "not": {
+                  "required": [
+                    "delivery_class"
+                  ]
+                }
+              },
+              "if": {
+                "properties": {
+                  "mutating": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "mutating"
+                ]
+              },
+              "then": {
+                "required": [
+                  "delivery_class"
+                ]
+              }
+            }
+          ],
+          "properties": {
+            "delivery_class": {
+              "enum": [
+                "provider_idempotent",
+                "state_reconciled",
+                "at_most_once"
+              ],
+              "type": "string"
+            },
+            "mutating": {
+              "type": "boolean"
+            },
+            "name": {
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "role": {
+              "enum": [
+                "provider",
+                "agent-harness",
+                "session-runtime",
+                "execution-environment",
+                "orchestration"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "role"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "platform": {
+      "additionalProperties": false,
+      "properties": {
+        "architecture": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "type": "string"
+        },
+        "os": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "os",
+        "architecture"
+      ],
+      "type": "object"
+    },
+    "provider_local_value": {
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "propertyNames": {
+            "not": {
+              "enum": [
+                "tenant_id",
+                "project_id",
+                "initiative_id",
+                "work_item_id",
+                "gateway_id",
+                "session_id",
+                "canonical_session_id",
+                "correlation_id",
+                "causation_id",
+                "sensitivity",
+                "authority",
+                "verification_tier",
+                "tier",
+                "verified",
+                "artifact_id",
+                "creator_type",
+                "creator_id",
+                "review_state",
+                "classification",
+                "approval_id",
+                "approved",
+                "decision_revision"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$id": "urn:gocodealone:mission-control:provider-manifest:v1alpha1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "tenant_id"
+            ]
+          },
+          {
+            "required": [
+              "project_id"
+            ]
+          },
+          {
+            "required": [
+              "initiative_id"
+            ]
+          },
+          {
+            "required": [
+              "work_item_id"
+            ]
+          },
+          {
+            "required": [
+              "gateway_id"
+            ]
+          },
+          {
+            "required": [
+              "session_id"
+            ]
+          },
+          {
+            "required": [
+              "canonical_session_id"
+            ]
+          },
+          {
+            "required": [
+              "correlation_id"
+            ]
+          },
+          {
+            "required": [
+              "causation_id"
+            ]
+          },
+          {
+            "required": [
+              "sensitivity"
+            ]
+          },
+          {
+            "required": [
+              "authority"
+            ]
+          },
+          {
+            "required": [
+              "verification_tier"
+            ]
+          },
+          {
+            "required": [
+              "tier"
+            ]
+          },
+          {
+            "required": [
+              "verified"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "capabilities": {
+      "items": {
+        "$ref": "#/$defs/capability"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "configuration_schema": {
+      "maxLength": 512,
+      "minLength": 1,
+      "not": {
+        "pattern": "\\.\\."
+      },
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$",
+      "type": "string"
+    },
+    "executable": {
+      "maxLength": 256,
+      "minLength": 1,
+      "not": {
+        "enum": [
+          ".",
+          ".."
+        ],
+        "type": "string"
+      },
+      "pattern": "^[^/\\\\\\x00\\r\\n]+$",
+      "type": "string"
+    },
+    "extensions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/provider_local_value"
+      },
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,63}$"
+      },
+      "type": "object"
+    },
+    "id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+      "type": "string"
+    },
+    "interaction_modes": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9][a-z0-9._-]*$",
+        "type": "string"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "name": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "permissions": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9][a-z0-9._-]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "platforms": {
+      "items": {
+        "$ref": "#/$defs/platform"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "protocol_version": {
+      "const": "mission-control.provider.v1alpha1"
+    },
+    "roles": {
+      "items": {
+        "enum": [
+          "agent-harness",
+          "session-runtime",
+          "execution-environment",
+          "orchestration"
+        ],
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[^\\x00\\r\\n\\t ]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "id",
+    "roles",
+    "name",
+    "version",
+    "executable",
+    "platforms",
+    "capabilities",
+    "interaction_modes",
+    "permissions",
+    "configuration_schema",
+    "extensions"
+  ],
+  "title": "Mission Control provider manifest v1alpha1",
+  "type": "object"
+}

@@ -1,0 +1,2168 @@
+{
+  "$defs": {
+    "activity_state": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "authoritative",
+            "inferred"
+          ],
+          "type": "string"
+        },
+        "axis": {
+          "const": "activity"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "idle",
+            "working",
+            "waiting_for_user",
+            "waiting_for_approval",
+            "blocked",
+            "done",
+            "failed",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "axis",
+        "state",
+        "source",
+        "observed_at",
+        "sequence",
+        "confidence",
+        "authority"
+      ],
+      "type": "object"
+    },
+    "approval_decision": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "binding": {
+          "additionalProperties": false,
+          "properties": {
+            "command_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "context_version": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "environment": {
+              "additionalProperties": false,
+              "properties": {
+                "provider": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "role": {
+                  "const": "execution-environment"
+                }
+              },
+              "required": [
+                "role",
+                "provider"
+              ],
+              "type": "object"
+            },
+            "expires_at": {
+              "format": "date-time",
+              "pattern": "Z$",
+              "type": "string"
+            },
+            "gateway_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "harness": {
+              "additionalProperties": false,
+              "properties": {
+                "provider": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "role": {
+                  "const": "agent-harness"
+                }
+              },
+              "required": [
+                "role",
+                "provider"
+              ],
+              "type": "object"
+            },
+            "nonce": {
+              "maxLength": 256,
+              "minLength": 22,
+              "pattern": "^[A-Za-z0-9_-]{22,256}$",
+              "type": "string"
+            },
+            "policy_revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "resource_revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "runtime": {
+              "additionalProperties": false,
+              "properties": {
+                "provider": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "role": {
+                  "const": "session-runtime"
+                }
+              },
+              "required": [
+                "role",
+                "provider"
+              ],
+              "type": "object"
+            },
+            "scopes": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                "type": "string"
+              },
+              "maxItems": 64,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "session_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "session_revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "work_item_revision": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "command_digest",
+            "session_id",
+            "session_revision",
+            "work_item_revision",
+            "resource_revision",
+            "context_version",
+            "policy_revision",
+            "environment",
+            "harness",
+            "gateway_id",
+            "scopes",
+            "expires_at",
+            "nonce"
+          ],
+          "type": "object"
+        },
+        "decided_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "decision_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "outcome": {
+          "enum": [
+            "approved",
+            "rejected",
+            "expired"
+          ],
+          "type": "string"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "approval_id",
+        "outcome",
+        "binding",
+        "decision_revision",
+        "decided_at"
+      ],
+      "type": "object"
+    },
+    "canonical_event": {
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provider_event": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "type": {
+                        "pattern": "^session\\."
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "native_session_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "session_id"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "authority": {
+          "const": "gateway-assigned"
+        },
+        "causation_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "correlation_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "gateway_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "provider_event": {
+          "$ref": "#/$defs/provider_event"
+        },
+        "sensitivity": {
+          "enum": [
+            "public",
+            "metadata",
+            "internal",
+            "confidential",
+            "restricted"
+          ],
+          "type": "string"
+        },
+        "session_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "tenant_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "tenant_id",
+        "gateway_id",
+        "correlation_id",
+        "sensitivity",
+        "authority",
+        "provider_event"
+      ],
+      "type": "object"
+    },
+    "health_state": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "authoritative",
+            "inferred"
+          ],
+          "type": "string"
+        },
+        "axis": {
+          "const": "health"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "healthy",
+            "degraded",
+            "unreachable",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "axis",
+        "state",
+        "source",
+        "observed_at",
+        "sequence",
+        "confidence",
+        "authority"
+      ],
+      "type": "object"
+    },
+    "lifecycle_state": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "authoritative",
+            "inferred"
+          ],
+          "type": "string"
+        },
+        "axis": {
+          "const": "lifecycle"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "provisioning",
+            "starting",
+            "running",
+            "stopped",
+            "terminated",
+            "archived",
+            "disconnected",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "axis",
+        "state",
+        "source",
+        "observed_at",
+        "sequence",
+        "confidence",
+        "authority"
+      ],
+      "type": "object"
+    },
+    "provider_artifact_report": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "extensions": {
+          "additionalProperties": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "maxProperties": 64,
+          "propertyNames": {
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,63}$"
+          },
+          "type": "object"
+        },
+        "locality": {
+          "enum": [
+            "local-only",
+            "upload-eligible"
+          ],
+          "type": "string"
+        },
+        "locator": {
+          "maxLength": 2048,
+          "pattern": "^local-resource://[A-Za-z0-9][A-Za-z0-9._-]{0,127}/[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "mime_type": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "native_artifact_id": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "native_session_id": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "report_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "agent-harness",
+            "session-runtime",
+            "execution-environment",
+            "orchestration"
+          ],
+          "type": "string"
+        },
+        "size": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source_locators": {
+          "items": {
+            "maxLength": 2048,
+            "pattern": "^local-resource://[A-Za-z0-9][A-Za-z0-9._-]{0,127}/[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n\\t ]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "report_id",
+        "provider_id",
+        "role",
+        "stream_id",
+        "native_artifact_id",
+        "version",
+        "locality",
+        "locator",
+        "mime_type",
+        "size",
+        "digest",
+        "source_locators",
+        "extensions"
+      ],
+      "type": "object"
+    },
+    "provider_event": {
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "tenant_id"
+                ]
+              },
+              {
+                "required": [
+                  "project_id"
+                ]
+              },
+              {
+                "required": [
+                  "initiative_id"
+                ]
+              },
+              {
+                "required": [
+                  "work_item_id"
+                ]
+              },
+              {
+                "required": [
+                  "gateway_id"
+                ]
+              },
+              {
+                "required": [
+                  "session_id"
+                ]
+              },
+              {
+                "required": [
+                  "canonical_session_id"
+                ]
+              },
+              {
+                "required": [
+                  "correlation_id"
+                ]
+              },
+              {
+                "required": [
+                  "causation_id"
+                ]
+              },
+              {
+                "required": [
+                  "sensitivity"
+                ]
+              },
+              {
+                "required": [
+                  "authority"
+                ]
+              },
+              {
+                "required": [
+                  "verification_tier"
+                ]
+              },
+              {
+                "required": [
+                  "tier"
+                ]
+              },
+              {
+                "required": [
+                  "verified"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "pattern": "^session\\."
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "role": {
+                "not": {
+                  "const": "provider"
+                }
+              }
+            },
+            "required": [
+              "native_session_id"
+            ]
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "payload": {
+                "$ref": "#/$defs/provider_local_value"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "type": {
+                "const": "session.state_changed"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "payload": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/lifecycle_state"
+                  },
+                  {
+                    "$ref": "#/$defs/activity_state"
+                  },
+                  {
+                    "$ref": "#/$defs/health_state"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "pattern": "^artifact\\."
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "payload": {
+                "$ref": "#/$defs/provider_artifact_report"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "event_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "extensions": {
+          "additionalProperties": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "maxProperties": 64,
+          "propertyNames": {
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,63}$"
+          },
+          "type": "object"
+        },
+        "native_session_id": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\x00\\r\\n]+$",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "payload": {},
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "provider",
+            "agent-harness",
+            "session-runtime",
+            "execution-environment",
+            "orchestration"
+          ],
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "stream_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "type": {
+          "oneOf": [
+            {
+              "enum": [
+                "adapter.degraded",
+                "adapter.recovered",
+                "artifact.created",
+                "artifact.deleted",
+                "artifact.review_requested",
+                "artifact.updated",
+                "session.approval_requested",
+                "session.checkpoint_created",
+                "session.completed",
+                "session.context_delivered",
+                "session.created",
+                "session.disconnected",
+                "session.discovered",
+                "session.failed",
+                "session.input_requested",
+                "session.output_available",
+                "session.recovered",
+                "session.state_changed",
+                "usage.updated"
+              ],
+              "type": "string"
+            },
+            {
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,63}$",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "protocol_version",
+        "event_id",
+        "provider_id",
+        "role",
+        "stream_id",
+        "type",
+        "sequence",
+        "observed_at",
+        "payload",
+        "extensions"
+      ],
+      "type": "object"
+    },
+    "provider_local_value": {
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "propertyNames": {
+            "not": {
+              "enum": [
+                "tenant_id",
+                "project_id",
+                "initiative_id",
+                "work_item_id",
+                "gateway_id",
+                "session_id",
+                "canonical_session_id",
+                "correlation_id",
+                "causation_id",
+                "sensitivity",
+                "authority",
+                "verification_tier",
+                "tier",
+                "verified",
+                "artifact_id",
+                "creator_type",
+                "creator_id",
+                "review_state",
+                "classification",
+                "approval_id",
+                "approved",
+                "decision_revision"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/provider_local_value"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verification": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "tier": {
+                "const": "native_contract_tested"
+              }
+            },
+            "required": [
+              "tier"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "live_authorization"
+                  ]
+                },
+                {
+                  "required": [
+                    "live_receipt"
+                  ]
+                }
+              ]
+            },
+            "properties": {
+              "signature": {
+                "additionalProperties": false,
+                "properties": {
+                  "algorithm": {
+                    "const": "ed25519"
+                  },
+                  "issuer": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                    "type": "string"
+                  },
+                  "key_id": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "enum": [
+                      "contract-verification"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "pattern": "^[A-Za-z0-9_-]{86}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "algorithm",
+                  "purpose",
+                  "issuer",
+                  "key_id",
+                  "value"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "tier": {
+                "const": "live_verified"
+              }
+            },
+            "required": [
+              "tier"
+            ]
+          },
+          "then": {
+            "properties": {
+              "signature": {
+                "additionalProperties": false,
+                "properties": {
+                  "algorithm": {
+                    "const": "ed25519"
+                  },
+                  "issuer": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                    "type": "string"
+                  },
+                  "key_id": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "enum": [
+                      "live-verification"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "pattern": "^[A-Za-z0-9_-]{86}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "algorithm",
+                  "purpose",
+                  "issuer",
+                  "key_id",
+                  "value"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "live_authorization",
+              "live_receipt"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "evidence_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "pattern": "Z$",
+          "type": "string"
+        },
+        "live_authorization": {
+          "additionalProperties": false,
+          "properties": {
+            "authorization_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "budget_reference": {
+              "maxLength": 1024,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9._/@+~=\\-]+:[A-Za-z0-9._:/@+~=\\-]*$",
+              "type": "string"
+            },
+            "correlation_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "credential_reference": {
+              "maxLength": 1024,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9._/@+~=\\-]+:[A-Za-z0-9._:/@+~=\\-]*$",
+              "type": "string"
+            },
+            "expires_at": {
+              "format": "date-time",
+              "pattern": "Z$",
+              "type": "string"
+            },
+            "gateway_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "gateway_key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "issued_at": {
+              "format": "date-time",
+              "pattern": "Z$",
+              "type": "string"
+            },
+            "protocol_version": {
+              "const": "mission-control.provider.v1alpha1"
+            },
+            "run_nonce": {
+              "maxLength": 256,
+              "minLength": 22,
+              "pattern": "^[A-Za-z0-9_-]{22,256}$",
+              "type": "string"
+            },
+            "signature": {
+              "additionalProperties": false,
+              "properties": {
+                "algorithm": {
+                  "const": "ed25519"
+                },
+                "issuer": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "key_id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "purpose": {
+                  "enum": [
+                    "live-run-authorization"
+                  ],
+                  "type": "string"
+                },
+                "value": {
+                  "pattern": "^[A-Za-z0-9_-]{86}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "algorithm",
+                "purpose",
+                "issuer",
+                "key_id",
+                "value"
+              ],
+              "type": "object"
+            },
+            "subject": {
+              "additionalProperties": false,
+              "properties": {
+                "capabilities": {
+                  "items": {
+                    "oneOf": [
+                      {
+                        "enum": [
+                          "agent.cancel",
+                          "agent.get_native_identity",
+                          "agent.get_pending_approvals",
+                          "agent.get_state",
+                          "agent.get_tools",
+                          "agent.get_usage",
+                          "agent.interrupt",
+                          "agent.send_message",
+                          "approval.approve",
+                          "approval.expire",
+                          "approval.list",
+                          "approval.reject",
+                          "artifact.list",
+                          "artifact.register",
+                          "command.get_result",
+                          "context.confirm",
+                          "context.deliver",
+                          "environment.health",
+                          "environment.inspect",
+                          "environment.mount",
+                          "environment.provision",
+                          "environment.shutdown",
+                          "events.subscribe",
+                          "events.unsubscribe",
+                          "harness.inspect",
+                          "harness.launch",
+                          "harness.list",
+                          "harness.resume",
+                          "harness.stop",
+                          "pane.close",
+                          "pane.create",
+                          "pane.focus",
+                          "pane.get",
+                          "pane.list",
+                          "pane.resize",
+                          "pane.split",
+                          "provider.capabilities",
+                          "provider.health",
+                          "provider.initialize",
+                          "provider.shutdown",
+                          "runtime.adopt",
+                          "runtime.archive",
+                          "runtime.attach",
+                          "runtime.checkpoint",
+                          "runtime.clone",
+                          "runtime.create_session",
+                          "runtime.detach",
+                          "runtime.export",
+                          "runtime.fork",
+                          "runtime.get_session",
+                          "runtime.import",
+                          "runtime.list_sessions",
+                          "runtime.migrate",
+                          "runtime.restore",
+                          "runtime.resume",
+                          "runtime.snapshot",
+                          "runtime.stop_session",
+                          "runtime.terminate_session",
+                          "terminal.attach",
+                          "terminal.detach",
+                          "terminal.read",
+                          "terminal.resize",
+                          "terminal.send_input",
+                          "terminal.send_keys",
+                          "terminal.subscribe",
+                          "topology.get",
+                          "topology.subscribe",
+                          "workspace.close",
+                          "workspace.create",
+                          "workspace.get",
+                          "workspace.list"
+                        ],
+                        "type": "string"
+                      },
+                      {
+                        "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,127}$",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "maxItems": 256,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "cases": {
+                  "items": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                    "type": "string"
+                  },
+                  "maxItems": 512,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "configuration_digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "data_modes": {
+                  "items": {
+                    "enum": [
+                      "full",
+                      "ephemeral-transcript",
+                      "metadata-only",
+                      "local-control"
+                    ],
+                    "type": "string"
+                  },
+                  "maxItems": 4,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "native_artifact": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "platform": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "architecture": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                      "type": "string"
+                    },
+                    "os": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "os",
+                    "architecture"
+                  ],
+                  "type": "object"
+                },
+                "provider": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "suite_digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "suite_version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider",
+                "native_artifact",
+                "platform",
+                "capabilities",
+                "cases",
+                "suite_version",
+                "suite_digest",
+                "configuration_digest",
+                "data_modes"
+              ],
+              "type": "object"
+            },
+            "tenant_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "trust_epoch": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "protocol_version",
+            "authorization_id",
+            "subject",
+            "tenant_id",
+            "gateway_id",
+            "gateway_key_id",
+            "correlation_id",
+            "run_nonce",
+            "budget_reference",
+            "credential_reference",
+            "issued_at",
+            "expires_at",
+            "trust_epoch",
+            "signature"
+          ],
+          "type": "object"
+        },
+        "live_receipt": {
+          "additionalProperties": false,
+          "properties": {
+            "audit_event_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "authorization_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "budget_reference": {
+              "maxLength": 1024,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9._/@+~=\\-]+:[A-Za-z0-9._:/@+~=\\-]*$",
+              "type": "string"
+            },
+            "correlation_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "credential_reference": {
+              "maxLength": 1024,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9._/@+~=\\-]+:[A-Za-z0-9._:/@+~=\\-]*$",
+              "type": "string"
+            },
+            "gateway_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "issued_at": {
+              "format": "date-time",
+              "pattern": "Z$",
+              "type": "string"
+            },
+            "protocol_version": {
+              "const": "mission-control.provider.v1alpha1"
+            },
+            "receipt_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "result": {
+              "enum": [
+                "passed",
+                "failed"
+              ],
+              "type": "string"
+            },
+            "run_nonce": {
+              "maxLength": 256,
+              "minLength": 22,
+              "pattern": "^[A-Za-z0-9_-]{22,256}$",
+              "type": "string"
+            },
+            "signature": {
+              "additionalProperties": false,
+              "properties": {
+                "algorithm": {
+                  "const": "ed25519"
+                },
+                "issuer": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "key_id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "purpose": {
+                  "enum": [
+                    "live-run-receipt"
+                  ],
+                  "type": "string"
+                },
+                "value": {
+                  "pattern": "^[A-Za-z0-9_-]{86}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "algorithm",
+                "purpose",
+                "issuer",
+                "key_id",
+                "value"
+              ],
+              "type": "object"
+            },
+            "subject": {
+              "additionalProperties": false,
+              "properties": {
+                "capabilities": {
+                  "items": {
+                    "oneOf": [
+                      {
+                        "enum": [
+                          "agent.cancel",
+                          "agent.get_native_identity",
+                          "agent.get_pending_approvals",
+                          "agent.get_state",
+                          "agent.get_tools",
+                          "agent.get_usage",
+                          "agent.interrupt",
+                          "agent.send_message",
+                          "approval.approve",
+                          "approval.expire",
+                          "approval.list",
+                          "approval.reject",
+                          "artifact.list",
+                          "artifact.register",
+                          "command.get_result",
+                          "context.confirm",
+                          "context.deliver",
+                          "environment.health",
+                          "environment.inspect",
+                          "environment.mount",
+                          "environment.provision",
+                          "environment.shutdown",
+                          "events.subscribe",
+                          "events.unsubscribe",
+                          "harness.inspect",
+                          "harness.launch",
+                          "harness.list",
+                          "harness.resume",
+                          "harness.stop",
+                          "pane.close",
+                          "pane.create",
+                          "pane.focus",
+                          "pane.get",
+                          "pane.list",
+                          "pane.resize",
+                          "pane.split",
+                          "provider.capabilities",
+                          "provider.health",
+                          "provider.initialize",
+                          "provider.shutdown",
+                          "runtime.adopt",
+                          "runtime.archive",
+                          "runtime.attach",
+                          "runtime.checkpoint",
+                          "runtime.clone",
+                          "runtime.create_session",
+                          "runtime.detach",
+                          "runtime.export",
+                          "runtime.fork",
+                          "runtime.get_session",
+                          "runtime.import",
+                          "runtime.list_sessions",
+                          "runtime.migrate",
+                          "runtime.restore",
+                          "runtime.resume",
+                          "runtime.snapshot",
+                          "runtime.stop_session",
+                          "runtime.terminate_session",
+                          "terminal.attach",
+                          "terminal.detach",
+                          "terminal.read",
+                          "terminal.resize",
+                          "terminal.send_input",
+                          "terminal.send_keys",
+                          "terminal.subscribe",
+                          "topology.get",
+                          "topology.subscribe",
+                          "workspace.close",
+                          "workspace.create",
+                          "workspace.get",
+                          "workspace.list"
+                        ],
+                        "type": "string"
+                      },
+                      {
+                        "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,127}$",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "maxItems": 256,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "cases": {
+                  "items": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                    "type": "string"
+                  },
+                  "maxItems": 512,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "configuration_digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "data_modes": {
+                  "items": {
+                    "enum": [
+                      "full",
+                      "ephemeral-transcript",
+                      "metadata-only",
+                      "local-control"
+                    ],
+                    "type": "string"
+                  },
+                  "maxItems": 4,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "native_artifact": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "platform": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "architecture": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                      "type": "string"
+                    },
+                    "os": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "os",
+                    "architecture"
+                  ],
+                  "type": "object"
+                },
+                "provider": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "pattern": "^sha256:[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                      "type": "string"
+                    },
+                    "version": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "digest"
+                  ],
+                  "type": "object"
+                },
+                "suite_digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "suite_version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "provider",
+                "native_artifact",
+                "platform",
+                "capabilities",
+                "cases",
+                "suite_version",
+                "suite_digest",
+                "configuration_digest",
+                "data_modes"
+              ],
+              "type": "object"
+            },
+            "tenant_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "usage": {
+              "additionalProperties": false,
+              "properties": {
+                "cost_microunits": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "input_tokens": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "output_tokens": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "input_tokens",
+                "output_tokens",
+                "cost_microunits"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "protocol_version",
+            "receipt_id",
+            "authorization_id",
+            "subject",
+            "tenant_id",
+            "gateway_id",
+            "correlation_id",
+            "run_nonce",
+            "budget_reference",
+            "credential_reference",
+            "result",
+            "usage",
+            "audit_event_id",
+            "issued_at",
+            "signature"
+          ],
+          "type": "object"
+        },
+        "protocol_version": {
+          "const": "mission-control.provider.v1alpha1"
+        },
+        "reference": {
+          "maxLength": 1024,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9._/@+~=\\-]+:[A-Za-z0-9._:/@+~=\\-]*$",
+          "type": "string"
+        },
+        "result": {
+          "enum": [
+            "passed",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "signature": {
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "const": "ed25519"
+            },
+            "issuer": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "key_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            "purpose": {
+              "enum": [
+                "contract-verification",
+                "live-verification"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "pattern": "^[A-Za-z0-9_-]{86}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "algorithm",
+            "purpose",
+            "issuer",
+            "key_id",
+            "value"
+          ],
+          "type": "object"
+        },
+        "subject": {
+          "additionalProperties": false,
+          "properties": {
+            "capabilities": {
+              "items": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      "agent.cancel",
+                      "agent.get_native_identity",
+                      "agent.get_pending_approvals",
+                      "agent.get_state",
+                      "agent.get_tools",
+                      "agent.get_usage",
+                      "agent.interrupt",
+                      "agent.send_message",
+                      "approval.approve",
+                      "approval.expire",
+                      "approval.list",
+                      "approval.reject",
+                      "artifact.list",
+                      "artifact.register",
+                      "command.get_result",
+                      "context.confirm",
+                      "context.deliver",
+                      "environment.health",
+                      "environment.inspect",
+                      "environment.mount",
+                      "environment.provision",
+                      "environment.shutdown",
+                      "events.subscribe",
+                      "events.unsubscribe",
+                      "harness.inspect",
+                      "harness.launch",
+                      "harness.list",
+                      "harness.resume",
+                      "harness.stop",
+                      "pane.close",
+                      "pane.create",
+                      "pane.focus",
+                      "pane.get",
+                      "pane.list",
+                      "pane.resize",
+                      "pane.split",
+                      "provider.capabilities",
+                      "provider.health",
+                      "provider.initialize",
+                      "provider.shutdown",
+                      "runtime.adopt",
+                      "runtime.archive",
+                      "runtime.attach",
+                      "runtime.checkpoint",
+                      "runtime.clone",
+                      "runtime.create_session",
+                      "runtime.detach",
+                      "runtime.export",
+                      "runtime.fork",
+                      "runtime.get_session",
+                      "runtime.import",
+                      "runtime.list_sessions",
+                      "runtime.migrate",
+                      "runtime.restore",
+                      "runtime.resume",
+                      "runtime.snapshot",
+                      "runtime.stop_session",
+                      "runtime.terminate_session",
+                      "terminal.attach",
+                      "terminal.detach",
+                      "terminal.read",
+                      "terminal.resize",
+                      "terminal.send_input",
+                      "terminal.send_keys",
+                      "terminal.subscribe",
+                      "topology.get",
+                      "topology.subscribe",
+                      "workspace.close",
+                      "workspace.create",
+                      "workspace.get",
+                      "workspace.list"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+/[a-z][a-z0-9._-]{0,127}$",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 256,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "cases": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                "type": "string"
+              },
+              "maxItems": 512,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "configuration_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "data_modes": {
+              "items": {
+                "enum": [
+                  "full",
+                  "ephemeral-transcript",
+                  "metadata-only",
+                  "local-control"
+                ],
+                "type": "string"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "native_artifact": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "platform": {
+              "additionalProperties": false,
+              "properties": {
+                "architecture": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                  "type": "string"
+                },
+                "os": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "os",
+                "architecture"
+              ],
+              "type": "object"
+            },
+            "provider": {
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+                  "type": "string"
+                },
+                "version": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "digest"
+              ],
+              "type": "object"
+            },
+            "suite_digest": {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "suite_version": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9._:/@+~=\\-]+$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "provider",
+            "native_artifact",
+            "platform",
+            "capabilities",
+            "cases",
+            "suite_version",
+            "suite_digest",
+            "configuration_digest",
+            "data_modes"
+          ],
+          "type": "object"
+        },
+        "tier": {
+          "enum": [
+            "native_contract_tested",
+            "live_verified"
+          ],
+          "type": "string"
+        },
+        "trust_epoch": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "evidence_id",
+        "tier",
+        "subject",
+        "result",
+        "reference",
+        "issued_at",
+        "expires_at",
+        "trust_epoch",
+        "signature"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:gocodealone:mission-control:event:v1alpha1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/provider_event"
+    },
+    {
+      "$ref": "#/$defs/canonical_event"
+    }
+  ],
+  "title": "Mission Control provider and canonical events v1alpha1"
+}

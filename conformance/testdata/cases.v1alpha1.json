@@ -1,0 +1,125 @@
+{
+  "schema_version": "mission-control.conformance.cases.v1alpha1",
+  "suite_version": "0.1.0",
+  "cases": [
+    {
+      "id": "protocol.initialize.required",
+      "description": "Negotiates the required provider protocol and capabilities.",
+      "kind": "initialize_required",
+      "required": true
+    },
+    {
+      "id": "capability.optional",
+      "description": "Treats unadvertised optional capabilities as absent rather than provider failure.",
+      "kind": "optional_capabilities",
+      "required": true
+    },
+    {
+      "id": "capability.mapping",
+      "description": "Maps every advertised capability to its conformance cases.",
+      "kind": "capability_mapping",
+      "required": true
+    },
+    {
+      "id": "capability.not_supported",
+      "description": "Returns the structured not_supported error for a required unadvertised capability.",
+      "kind": "not_supported",
+      "required": true,
+      "expected_code": "not_supported"
+    },
+    {
+      "id": "events.duplicate",
+      "description": "Classifies an exact duplicate event without conflicting with prior content.",
+      "kind": "event_duplicate",
+      "required": true,
+      "capability": "events.subscribe",
+      "when_advertised": true
+    },
+    {
+      "id": "events.out_of_order",
+      "description": "Accepts independently valid out-of-order event delivery.",
+      "kind": "event_out_of_order",
+      "required": true,
+      "capability": "events.subscribe",
+      "when_advertised": true
+    },
+    {
+      "id": "events.replay_gap",
+      "description": "Detects a replay sequence gap for reconciliation.",
+      "kind": "replay_gap",
+      "required": true,
+      "capability": "events.subscribe",
+      "when_advertised": true,
+      "requires_replay": true
+    },
+    {
+      "id": "transport.reconnect",
+      "description": "Negotiates a fresh external provider connection after disconnect.",
+      "kind": "reconnect",
+      "required": true
+    },
+    {
+      "id": "transport.cancellation",
+      "description": "Propagates cancellation as a structured protocol outcome.",
+      "kind": "cancellation",
+      "required": true
+    },
+    {
+      "id": "command.deadline",
+      "description": "Rejects a mutating command whose deadline has expired.",
+      "kind": "deadline",
+      "required": true
+    },
+    {
+      "id": "terminal.backpressure",
+      "description": "Honors the terminal credit window before additional output.",
+      "kind": "backpressure",
+      "required": true,
+      "capability": "terminal.subscribe",
+      "when_advertised": true
+    },
+    {
+      "id": "transport.oversized_frame",
+      "description": "Never publishes a response beyond the negotiated frame bound.",
+      "kind": "oversized_frame",
+      "required": true,
+      "expected_code": "message_too_large"
+    },
+    {
+      "id": "transport.crash_recovery",
+      "description": "Recovers by launching and negotiating a new external provider process.",
+      "kind": "crash_recovery",
+      "required": true
+    },
+    {
+      "id": "security.redaction",
+      "description": "Keeps a secret marker out of diagnostics and reports.",
+      "kind": "redaction",
+      "required": true
+    },
+    {
+      "id": "delivery.provider_idempotent",
+      "description": "Preserves one result for an exact provider-idempotent retry.",
+      "kind": "delivery_class",
+      "required": true,
+      "delivery_class": "provider_idempotent",
+      "when_advertised": true
+    },
+    {
+      "id": "delivery.state_reconciled",
+      "description": "Preserves one result for an exact state-reconciled retry.",
+      "kind": "delivery_class",
+      "required": true,
+      "delivery_class": "state_reconciled",
+      "when_advertised": true
+    },
+    {
+      "id": "delivery.at_most_once",
+      "description": "Does not execute an exact at-most-once retry twice.",
+      "kind": "delivery_class",
+      "required": true,
+      "delivery_class": "at_most_once",
+      "when_advertised": true
+    }
+  ]
+}
