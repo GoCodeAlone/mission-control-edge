@@ -36,7 +36,8 @@
   "scripts": {
     "test": "vitest run",
     "lint": "tsc --noEmit -p tsconfig.json",
-    "build": "npm run clean && tsup src/index.ts --format esm,cjs --dts --sourcemap --tsconfig tsconfig.build.json --out-dir dist && tsup examples/provider.ts --format esm --sourcemap --tsconfig tsconfig.build.json --out-dir dist/examples && npm run stage:package",
+    "build": "npm run clean && tsup src/index.ts --format esm,cjs --sourcemap --tsconfig tsconfig.build.json --out-dir dist && npm run build:types && tsup examples/provider.ts --format esm --sourcemap --tsconfig tsconfig.build.json --out-dir dist/examples && npm run stage:package",
+    "build:types": "tsc --emitDeclarationOnly -p tsconfig.declarations.json",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "stage:package": "node -e \"const f=require('node:fs'),p=require('node:path');f.mkdirSync('dist/schema',{recursive:true});for(const n of ['command.v1alpha1.schema.json','event.v1alpha1.schema.json','openrpc.v1alpha1.json','provider-manifest.v1alpha1.schema.json','session.v1alpha1.schema.json'])f.copyFileSync(p.join('../../schema',n),p.join('dist/schema',n));for(const n of ['LICENSE','NOTICE','README.md'])f.copyFileSync(p.join('../..',n),p.join('dist',n))\"",
     "prepack": "npm run build"
@@ -46,10 +47,10 @@
     "ajv-formats": "3.0.1"
   },
   "devDependencies": {
-    "@types/node": "26.1.1",
+    "@types/node": "26.2.0",
     "tsup": "8.5.1",
-    "typescript": "5.9.3",
-    "vitest": "4.1.10"
+    "typescript": "7.0.2",
+    "vitest": "4.1.11"
   },
   "overrides": {
     "esbuild": "0.28.1"
