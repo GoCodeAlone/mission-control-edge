@@ -38,7 +38,11 @@ required=(
   package/dist/index.js
   package/dist/index.cjs
   package/dist/index.d.ts
-  package/dist/index.d.cts
+  package/dist/client.d.ts
+  package/dist/errors.d.ts
+  package/dist/server.d.ts
+  package/dist/stdio.d.ts
+  package/dist/types.d.ts
   package/dist/index.js.map
   package/dist/index.cjs.map
   package/dist/examples/provider.js
