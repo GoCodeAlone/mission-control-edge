@@ -40,6 +40,27 @@ jobs:
           version: v2.12.2
           args: --new-from-rev=origin/main
 
+  go-minimum:
+    name: ci/go-minimum
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GOTOOLCHAIN: local
+      GOWORK: off
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Set up minimum supported Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e  # v7.0.0
+        with:
+          go-version: '1.26.4'
+          cache: false
+      - name: Test minimum supported Go
+        run: go test ./... -race -count=1
+      - name: Vet minimum supported Go
+        run: go vet ./...
+
   typescript:
     name: ci/typescript
     runs-on: ubuntu-latest
@@ -197,7 +218,7 @@ jobs:
   clean-consumer:
     name: ci/clean-consumer
     if: github.event_name == 'push' && github.repository == 'GoCodeAlone/mission-control-edge'
-    needs: [go, typescript, conformance, release-snapshot, security]
+    needs: [go, go-minimum, typescript, conformance, release-snapshot, security]
     runs-on: ubuntu-latest
     permissions:
       contents: read

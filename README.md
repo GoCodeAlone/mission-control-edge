@@ -67,8 +67,10 @@ authorized versions through public interfaces.
 
 ## Development
 
-Go 1.26.4 is required. When the repository is nested below a workspace that
-contains `go.work`, disable the parent workspace so checks use this module:
+Development and release builds use Go 1.27.1. Go SDK consumers remain supported
+on Go 1.26.4, which CI checks separately with automatic toolchain switching
+disabled. When the repository is nested below a workspace that contains
+`go.work`, disable the parent workspace so checks use this module:
 
 ```sh
 GOWORK=off go test ./... -race -count=1
