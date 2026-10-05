@@ -37,8 +37,41 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a  # v9.3.0
         with:
-          version: v2.12.2
+          version: v2.14.0
+          install-mode: goinstall
           args: --new-from-rev=origin/main
+
+  go-minimum:
+    name: ci/go-minimum
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GOTOOLCHAIN: local
+      GOWORK: off
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Set up minimum supported Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e  # v7.0.0
+        with:
+          go-version: '1.26.4'
+          cache: false
+      - name: Test minimum supported Go
+        run: go test ./... -race -count=1
+      - name: Vet minimum supported Go
+        run: go vet ./...
+      - name: Prepare minimum compiler lint configuration
+        run: >-
+          awk '{ print; if ($0 == "run:") print "  go: \"1.26.4\"" }' .golangci.yml
+          > "$RUNNER_TEMP/golangci-minimum.yml"
+      - name: Lint minimum supported Go
+        uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a  # v9.3.0
+        with:
+          version: v2.12.2
+          args: --config=${{ runner.temp }}/golangci-minimum.yml --new-from-rev=origin/main
 
   typescript:
     name: ci/typescript
@@ -197,7 +230,7 @@ jobs:
   clean-consumer:
     name: ci/clean-consumer
     if: github.event_name == 'push' && github.repository == 'GoCodeAlone/mission-control-edge'
-    needs: [go, typescript, conformance, release-snapshot, security]
+    needs: [go, go-minimum, typescript, conformance, release-snapshot, security]
     runs-on: ubuntu-latest
     permissions:
       contents: read

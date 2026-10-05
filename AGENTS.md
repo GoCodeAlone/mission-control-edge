@@ -21,7 +21,7 @@ and reference-provider repository for Mission Control.
 
 ## Working conventions
 
-- Use Go 1.26.4 and standard-library APIs unless a dependency is justified.
+- Use Go 1.27.1 for development and release builds. Preserve Go 1.26.4 consumer compatibility and use standard-library APIs unless a dependency is justified.
 - Use test-driven development for behavior changes. Run focused tests first,
   then the full race, vet, lint, vulnerability, and license gates.
 - Use `GOWORK=off` when a parent workspace has a `go.work` file.

@@ -593,6 +593,15 @@ func (c *Client) callValidated(ctx context.Context, method string, parameter, de
 	c.pending[requestID] = outcome
 	c.mu.Unlock()
 	if err := c.write(ctx, frame); err != nil {
+		// A final response and EOF can arrive before the writer publishes
+		// its acknowledgement. Preserve that completed RPC and its validation.
+		select {
+		case result := <-outcome:
+			if result.err == nil {
+				return finishClientOutcome(result, destination, validate)
+			}
+		default:
+		}
 		c.removePending(requestID)
 		return normalizeProtocolError(err)
 	}
