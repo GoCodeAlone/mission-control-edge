@@ -123,7 +123,7 @@ jobs:
           go-version-file: go.mod
           cache: false
       - name: Install pinned Syft
-        uses: anchore/sbom-action/download-syft@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26  # v0.24.2
+        uses: anchore/sbom-action/download-syft@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c  # v0.24.3
         with:
           syft-version: v1.44.0
       - name: Build release snapshot
@@ -183,13 +183,13 @@ jobs:
           go-licenses check --include_tests
           --disallowed_types=forbidden,restricted,reciprocal,unknown ./...
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@cdf488f595d80d6e07e03d4674febd5ab45fa938  # v4.37.9
+        uses: github/codeql-action/init@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2  # v4.38.2
         with:
           languages: go
           build-mode: manual
       - name: Build for CodeQL
         run: go build ./...
       - name: Analyze with CodeQL
-        uses: github/codeql-action/analyze@cdf488f595d80d6e07e03d4674febd5ab45fa938  # v4.37.9
+        uses: github/codeql-action/analyze@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2  # v4.38.2
         with:
           category: /language:go
