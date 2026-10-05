@@ -191,3 +191,35 @@ jobs:
             'any(.[].verificationResult.statement.subject[]?; .digest.sha256 == $digest) and
              any(.[].verificationResult.statement.predicate?; .spdxVersion == "SPDX-2.3")' \
             "$RUNNER_TEMP/sbom-attestation.json" >/dev/null
+
+  clean-consumer:
+    name: Verify released Go and TypeScript consumers
+    needs: [assets, npm]
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: read
+      contents: read
+      packages: read
+    steps:
+      - name: Check out released source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e  # v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
+        with:
+          node-version: 22
+      - name: Verify clean released consumers and attestations
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p 'require("./sdk/typescript/package.json").version')
+          [[ "$GITHUB_REF_NAME" == "v$version" ]]
+          scripts/clean-consumer-proof.sh --go-ref "$GITHUB_REF_NAME" \
+            --npm-spec "@gocodealone/mission-control-provider-sdk@$version" \
+            --expected-npm-version "$version" --verify-attestations

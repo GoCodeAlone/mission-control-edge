@@ -7,7 +7,7 @@ package_name="@gocodealone/mission-control-provider-sdk"
 registry="https://npm.pkg.github.com"
 go_ref=""
 npm_spec=""
-expected_npm_version="0.1.0"
+expected_npm_version=""
 conformance_timeout="60s"
 verify_attestations=false
 
@@ -17,7 +17,7 @@ Usage: scripts/clean-consumer-proof.sh [options]
 
   --go-ref REF                  Public Go tag or remotely reachable commit
   --npm-spec SPEC               Local SDK directory or published package spec
-  --expected-npm-version VER    Expected package version (default: 0.1.0)
+  --expected-npm-version VER    Expected version (default: SDK manifest/spec)
   --conformance-timeout DUR     Per-case outer timeout (default: 60s)
   --verify-attestations         Verify release provenance and SPDX attestations
   --help                        Show this help
@@ -85,6 +85,17 @@ fi
 if [[ -z "$npm_spec" ]]; then
   npm_spec="$repo_root/sdk/typescript"
 fi
+if [[ -z "$expected_npm_version" ]]; then
+  if [[ "$npm_spec" == "$package_name"@* ]]; then
+    expected_npm_version=${npm_spec#"$package_name"@}
+  else
+    expected_npm_version=$(node -p \
+      'JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8")).version' \
+      "$npm_spec/package.json")
+  fi
+fi
+[[ -n "$expected_npm_version" && "$expected_npm_version" != undefined ]] || \
+  fail "expected npm version is required"
 
 umask 077
 temporary_root=$(mktemp -d "${TMPDIR:-/tmp}/mission-control-clean-consumer.XXXXXX")
@@ -201,7 +212,15 @@ EOF
   esac
   installed_version=$(go list -m -f '{{.Version}}' "$module")
   if [[ "$go_ref" =~ ^[0-9a-f]{40}$ ]]; then
-    [[ "$installed_version" == *-"${go_ref:0:12}" ]] || exit 1
+    go mod download -json "$module@$installed_version" >"$temporary_root/go-origin.json"
+    node - "$temporary_root/go-origin.json" "$module" "$installed_version" \
+      "$go_ref" "https://github.com/$repository" <<'NODE'
+const fs = require("node:fs");
+const resolved = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+if (resolved.Path !== process.argv[3] || resolved.Version !== process.argv[4] ||
+    resolved.Origin?.VCS !== "git" || resolved.Origin?.Hash !== process.argv[5] ||
+    resolved.Origin?.URL !== process.argv[6]) process.exit(1);
+NODE
   elif [[ "$go_ref" == v* ]]; then
     [[ "$installed_version" == "$go_ref" ]] || exit 1
   fi
