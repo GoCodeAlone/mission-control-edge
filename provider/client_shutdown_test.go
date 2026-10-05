@@ -18,6 +18,7 @@ func TestClientPreservesResponseBeforeWriteAcknowledgementAndEOF(t *testing.T) {
 	}{
 		{name: "completed response", result: json.RawMessage(`{"accepted":true}`)},
 		{name: "invalid result still rejected", result: json.RawMessage(`{"accepted":true,"unknown":true}`), code: protocol.CodeInvalidArgument},
+		{name: "EOF without response still fails", code: protocol.CodeUnavailable},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			limits := TestLimits()
@@ -43,9 +44,13 @@ func TestClientPreservesResponseBeforeWriteAcknowledgementAndEOF(t *testing.T) {
 					}
 					client.mu.Lock()
 					outcome := client.pending[request.ID]
-					delete(client.pending, request.ID)
+					if len(test.result) != 0 {
+						delete(client.pending, request.ID)
+					}
 					client.mu.Unlock()
-					outcome <- clientOutcome{response: rpcResponse{JSONRPC: jsonRPCVersion, ID: request.ID, Result: test.result}}
+					if len(test.result) != 0 {
+						outcome <- clientOutcome{response: rpcResponse{JSONRPC: jsonRPCVersion, ID: request.ID, Result: test.result}}
+					}
 					// The peer's final reply and EOF can arrive before the writer
 					// goroutine publishes its acknowledgement.
 					client.fail(io.EOF)
