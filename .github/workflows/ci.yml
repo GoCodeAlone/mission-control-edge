@@ -196,7 +196,7 @@ jobs:
 
   clean-consumer:
     name: ci/clean-consumer
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.repository == 'GoCodeAlone/mission-control-edge'
     needs: [go, typescript, conformance, release-snapshot, security]
     runs-on: ubuntu-latest
     permissions:
