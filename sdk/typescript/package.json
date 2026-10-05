@@ -1,6 +1,6 @@
 {
   "name": "@gocodealone/mission-control-provider-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provider-neutral TypeScript SDK for the Mission Control edge protocol",
   "license": "Apache-2.0",
   "author": "GoCodeAlone",
