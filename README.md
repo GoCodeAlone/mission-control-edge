@@ -68,8 +68,11 @@ authorized versions through public interfaces.
 ## Development
 
 Development and release builds use Go 1.27.1. Go SDK consumers remain supported
-on Go 1.26.4, which CI checks separately with automatic toolchain switching
-disabled. When the repository is nested below a workspace that contains
+on Go 1.26.4, which CI checks separately with race tests, vet and the previous
+pinned linter, with automatic toolchain switching disabled. The compatibility
+lint configuration preserves all existing rules, including the previous
+nil-pointer check removed by the newer upstream analyzer. When the repository
+is nested below a workspace that contains
 `go.work`, disable the parent workspace so checks use this module:
 
 ```sh

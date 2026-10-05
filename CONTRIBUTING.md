@@ -12,6 +12,10 @@ remain replaceable, isolated processes reached through public contracts.
 - govulncheck 1.6.0
 - go-licenses 2.0.1
 
+CI also runs golangci-lint 2.12.2 with Go 1.26.4 and the same configured rules
+to preserve the previous analyzer's nil-pointer check. The development and
+release compiler remains Go 1.27.1.
+
 Do not commit credentials, npm tokens, provider-native state, transcripts, or
 customer data. Do not copy, link, or redistribute third-party harness/runtime
 code unless the repository's license and notices explicitly permit it.
