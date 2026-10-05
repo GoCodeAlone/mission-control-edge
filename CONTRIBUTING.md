@@ -7,8 +7,8 @@ remain replaceable, isolated processes reached through public contracts.
 
 ## Prerequisites
 
-- Go 1.26.4
-- golangci-lint 2.12.2
+- Go 1.27.1 (Go SDK consumer compatibility is checked on Go 1.26.4)
+- golangci-lint 2.14.0, built with Go 1.27.1
 - govulncheck 1.6.0
 - go-licenses 2.0.1
 
